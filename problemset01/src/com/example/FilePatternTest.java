@@ -1,4 +1,4 @@
-package pattern;
+package com.example;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -17,6 +17,7 @@ public class FilePatternTest {
     @Test public void fnameShouldMatchFname() {
         assertTrue(newFileFilter("fname").accept(new File("fname")));
     }
+
 
     @Test public void fnameShouldNotMatchF() {
         assertFalse(newFileFilter("fname").accept(new File("f")));
@@ -181,4 +182,5 @@ public class FilePatternTest {
     @Test public void fMarkDotTxtShouldNotMatchDotTxt() {
         assertFalse(newFileFilter("f?.txt").accept(new File(".txt")));
     }
+
 }
