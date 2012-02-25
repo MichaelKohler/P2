@@ -1,6 +1,6 @@
-# P2 Course, 2010
+# P2 Course, 2012
 
-1st Week, please push your solutions by Wednesday, March 2, 16:00 o'clock to our server.
+1st Week, please push your solutions by Thursday, March 1, 12:00 o'clock to our server.
 
 ## File filter task
 
@@ -15,5 +15,3 @@
 ## More Information
 
 - Please follow <http://twitter.com/p2unibe> 
-
-- Got questions? Ask <niko.schwarz@googlemail.com> 
