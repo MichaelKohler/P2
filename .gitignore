@@ -9,8 +9,6 @@
 *.launch
 .settings/
 .metadata
-.classpath
-.project
 
 # Hidden files
 .*
