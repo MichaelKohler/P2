@@ -1,6 +1,6 @@
 # P2 Course, 2012
 
-1st Week, please push your solutions by Thursday, March 1, 12:00 o'clock to our server.
+1st Week, please push your solutions by Friday, March 2, 12:00 o'clock to our server.
 
 ## File filter task
 
