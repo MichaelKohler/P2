@@ -182,5 +182,9 @@ public class FilePatternTest {
     @Test public void fMarkDotTxtShouldNotMatchDotTxt() {
         assertFalse(newFileFilter("f?.txt").accept(new File(".txt")));
     }
+    
+    @Test public void additionalTest1(){
+    	assertFalse(newFileFilter("fname*").accept(new File("afname.txt")));
+    }
 
 }
