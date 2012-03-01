@@ -186,5 +186,9 @@ public class FilePatternTest {
     @Test public void additionalTest1(){
     	assertFalse(newFileFilter("fname*").accept(new File("afname.txt")));
     }
+    
+    @Test public void additionalTest2(){
+        assertTrue(newFileFilter("*name*").accept(new File("afname.txt")));
+    }
 
 }

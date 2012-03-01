@@ -54,7 +54,7 @@ public class FilePattern implements FileFilter {
 			 */
 			int counter = -1;
 			String[] parts = pattern.split("\\*");
-			if(pattern.indexOf("*")==pattern.length()-1){
+			if(pattern.substring(pattern.length()-1).equals("*")){
 				parts = addToArray(parts, "");
 			}
 
