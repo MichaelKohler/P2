@@ -1,0 +1,468 @@
+diff --git a/problemset02/problemset02.patch b/problemset02/problemset02.patch
+new file mode 100644
+index 0000000..e69de29
+diff --git a/problemset02/src/snakes/Game.java b/problemset02/src/snakes/Game.java
+index b5ee162..87d5e2f 100644
+--- a/problemset02/src/snakes/Game.java
++++ b/problemset02/src/snakes/Game.java
+@@ -4,11 +4,13 @@ import java.util.ArrayList;
+ import java.util.LinkedList;
+ import java.util.List;
+ import java.util.Queue;
++import java.util.Random;
+ 
+ public class Game {
+ 	private List<ISquare> squares;
+ 	private int size;
+ 	private Queue<Player> players;
++	private ArrayList<Player> removedPlayers;
+ 	private Player winner;
+ 	
+ 	private boolean invariant() {
+@@ -16,9 +18,17 @@ public class Game {
+ 			&& size == squares.size()
+ 			&& players.size() > 1;
+ 	}
++	
++	// this is needed since the assertion would be false when a player
++	// lands on the InstantLose field
++	private boolean invariantWithoutPlayerSize() {
++        return squares.size() > 3
++            && size == squares.size();
++    }
+ 
+ 	public Game(int size, Player[] initPlayers) {
+ 		this.size = size;
++		this.removedPlayers = new ArrayList<Player>();
+ 		this.addSquares(size);
+ 		this.addPlayers(initPlayers);
+ 		assert invariant();
+@@ -59,11 +69,11 @@ public class Game {
+ 		assert roll>=1 && roll<=6;
+ 		Player currentPlayer = players.remove(); // from front of queue
+ 		currentPlayer.moveForward(roll);
+-		players.add(currentPlayer); // to back of the queue
+-		if (currentPlayer.wins()) {
+-			winner = currentPlayer;
++		if (!removedPlayers.contains(currentPlayer)) { // if not removed
++		    players.add(currentPlayer); // to back of the queue
+ 		}
+-		assert invariant();
++		checkWinner(currentPlayer);
++		assert invariantWithoutPlayerSize();
+ 	}
+ 
+ 	public void setSquare(int position, ISquare square) {
+@@ -77,6 +87,15 @@ public class Game {
+ 	public Player winner() {
+ 		return winner;
+ 	}
++	
++	public void checkWinner(Player currentPlayer) {
++	    if (currentPlayer.wins()) {
++            winner = currentPlayer;
++        }
++	    if (players.size() == 1) {
++	        winner = players.element(); // we can assume that this is the winner
++	    }
++	}
+ 
+ 	public ISquare firstSquare() {
+ 		return squares.get(0);
+@@ -112,6 +131,43 @@ public class Game {
+ 			players.add(player);
+ 		}
+ 	}
++	
++	public void removePlayer(Player player) {
++	    players.remove(player);
++	    System.out.println("Player " + player +
++	                       " was removed due to landing on InstantLose");
++	    removedPlayers.add(player);
++	}
++	
++	public void exchangePlayers(Square squareLandedOn, Player playerToSwap) {
++	    Player otherPlayer = getRandomOtherPlayer();
++	    Square playerToSwapSquare = (Square) getSquare(playerToSwap.position());
++        Square otherPlayerSquare = (Square) getSquare(otherPlayer.position());
++        // set squares (leave old fields and enter new fields)
++        playerToSwapSquare.leave(playerToSwap);
++	    playerToSwapSquare.enter(otherPlayer, true);
++	    otherPlayerSquare.leave(otherPlayer);
++	    otherPlayerSquare.enter(playerToSwap); // no second parameter necessary since
++	                                           // we're not landing on a ScambleUp field
++	    // set players (update the square information for the players)
++	    playerToSwap.changeSquare(otherPlayerSquare);
++	    otherPlayer.changeSquare(playerToSwapSquare);
++	    
++        System.out.println("Player " + playerToSwap + " was swapped with player " +
++                           otherPlayer + "!");
++	}
++	
++	private Player getRandomOtherPlayer() {
++	    ArrayList<Player> playersCopy = new ArrayList<Player>();
++	    playersCopy.addAll(players); // all players except the current player
++	    Random random = new Random();
++	    int index = random.nextInt(playersCopy.size());
++	    return playersCopy.get(index);
++	}
++	
++	public boolean playerStillPlaying(Player player) {
++	    return players.contains(player);
++	}
+ 
+ 	private void initSquare(int position, ISquare square) {
+ 		assert this.isValidPosition(position) && square != null;
+@@ -125,6 +181,14 @@ public class Game {
+ 	public void setSquareToSnake(int position, int transport) {
+ 		this.setSquare(position, new Snake(transport, this, position));
+ 	}
++	
++	public void setSquareToInstantLose(int position) {
++	    this.setSquare(position, new InstantLose(this, position));
++	}
++	
++	public void setSquareToScrambleUp(int position) {
++	    this.setSquare(position, new ScrambleUp(this, position));
++	}
+ 
+ 	public ISquare findSquare(int position, int moves) {
+ 		assert position + moves <= 2*size - 1; // can't go more than size-1 moves backwards past end
+diff --git a/problemset02/src/snakes/ISquare.java b/problemset02/src/snakes/ISquare.java
+index 33e95b9..8df8faa 100644
+--- a/problemset02/src/snakes/ISquare.java
++++ b/problemset02/src/snakes/ISquare.java
+@@ -1,12 +1,63 @@
+ package snakes;
+ 
+ public interface ISquare {
++    /**
++     * Returns the position of the square
++     *
++     * @return      position of the square
++     */
+ 	public int position();
++	
++	/**
++     * This method returns the square to land on.
++     *
++     * @param  moves  the amount of moves the player makes
++     * @return        the square to land on
++     */
+ 	public ISquare moveAndLand(int moves);
++	
++	/**
++     * Returns whether the square is the first one or not.
++     *
++     * @return      boolean value whether it is the first square or not
++     */
+ 	public boolean isFirstSquare();
++	
++	/**
++     * Returns whether the square is the first one or not.
++     *
++     * @return      boolean value whether it is the last square or not
++     */
+ 	public boolean isLastSquare();
++	
++	/**
++     * Enters the square.
++     *
++     * @param  player  the player who should enter this field
++     * @return         void
++     */
+ 	public void enter(Player player);
++	
++	/**
++     * Leaves the square.
++     *
++     * @param  player  the player who should leave this field
++     * @return         void
++     */
+ 	public void leave(Player player);
++	
++	/**
++     * Returns whether this square is occupied or not.
++     *
++     * @return      occupation state of the square
++     */
+ 	public boolean isOccupied();
++	
++	/**
++     * Returns the square the requesting player should land on. Either it's this square
++     * or the first square if it's occupied.
++     *
++     * @return      returns the square to land on as object
++     */
+ 	public ISquare landHereOrGoHome();
+ }
+diff --git a/problemset02/src/snakes/InstantLose.java b/problemset02/src/snakes/InstantLose.java
+index e51f591..f24f91e 100644
+--- a/problemset02/src/snakes/InstantLose.java
++++ b/problemset02/src/snakes/InstantLose.java
+@@ -1,11 +1,20 @@
+ package snakes;
+ 
+-import java.util.ArrayList;
+-import java.util.Collection;
+-
+ public class InstantLose extends Square implements ISquare {
+ 
+ 	public InstantLose(Game game, int position) {
+ 		super(game, position);
+ 	}
++	
++	@Override
++    public void enter(Player player) {
++        assert this.player == null;
++        this.player = player;
++        this.player.leaveGame(game, this);
++    }
++	
++	@Override
++    protected String squareLabel() {
++        return position + "||";
++    }
+ }
+\ No newline at end of file
+diff --git a/problemset02/src/snakes/InstantLoseTest.java b/problemset02/src/snakes/InstantLoseTest.java
+index 7a62a62..21f7c78 100644
+--- a/problemset02/src/snakes/InstantLoseTest.java
++++ b/problemset02/src/snakes/InstantLoseTest.java
+@@ -1,6 +1,39 @@
+ package snakes;
+ 
++import static org.junit.Assert.assertEquals;
++import static org.junit.Assert.assertTrue;
++import static org.junit.Assert.assertFalse;
++import ch.unibe.jexample.Given;
++import org.junit.Test;
+ 
+ public class InstantLoseTest {
++    private Player jack;
++    private Player jill;
++    private Game game;
+ 
++    @Test
++    public void initTestScenario() {
++        jack = new Player("Jack");
++        jill = new Player("Jill");
++        Player[] args = { jack, jill };
++        game = new Game(12, args);
++        game.setSquareToInstantLose(6);
++        assertTrue(game.notOver());
++        assertTrue(game.firstSquare().isOccupied());
++        assertEquals(1, jack.position());
++        assertEquals(1, jill.position());
++        assertEquals(jack, game.currentPlayer());
++    }
++    
++    @Given("initTestScenario")
++    public void notLandingOnFieldDoesntRemove() {
++        game.movePlayer(4); // Jack is now one field before the InstantLose
++        assertTrue(game.playerStillPlaying(game.currentPlayer()));
++    }
++
++    @Given("notLandingOnFieldDoesntRemove")
++    public void landingOnFieldRemovesPlayer() {
++        game.movePlayer(3);
++        assertFalse(game.playerStillPlaying(game.currentPlayer()));
++    }
+ }
+diff --git a/problemset02/src/snakes/Player.java b/problemset02/src/snakes/Player.java
+index d01d9ec..d46630e 100644
+--- a/problemset02/src/snakes/Player.java
++++ b/problemset02/src/snakes/Player.java
+@@ -20,6 +20,11 @@ public class Player {
+ 		square.enter(this);	
+ 		assert invariant();
+ 	}
++	
++	public void leaveGame(Game game, Square squareLandedOn) {
++	    square = squareLandedOn;
++	    game.removePlayer(this);
++	}
+ 
+ 	public int position() {
+ 		assert invariant();
+@@ -33,6 +38,10 @@ public class Player {
+ 		square.enter(this);
+ 	}
+ 	
++	public void changeWithOtherPlayer(Game game, ScrambleUp squareLandedOn) {
++	    game.exchangePlayers(squareLandedOn, this);
++	}
++	
+ 	public String toString() {
+ 		return name;
+ 	}
+@@ -41,6 +50,10 @@ public class Player {
+ 		return square;
+ 	}
+ 
++	public void changeSquare(ISquare newSquare) {
++	    square = newSquare;
++	}
++
+ 	public boolean wins() {
+ 		return square.isLastSquare();
+ 	}
+diff --git a/problemset02/src/snakes/ScrambleUp.java b/problemset02/src/snakes/ScrambleUp.java
+index 3a63b11..2f79ccd 100644
+--- a/problemset02/src/snakes/ScrambleUp.java
++++ b/problemset02/src/snakes/ScrambleUp.java
+@@ -1,11 +1,26 @@
+ package snakes;
+ 
+-import java.util.ArrayList;
+-import java.util.Collection;
+-import java.util.List;
+-
+-public class ScrambleUp implements ISquare {
++public class ScrambleUp extends Square implements ISquare {
+ 
++    public ScrambleUp(Game game, int position) {
++        super(game, position);
++    }
+ 
++    @Override
++    public void enter(Player player) {
++        assert this.player == null;
++        this.player = player;
++        this.player.changeWithOtherPlayer(game, this);
++    }
++    
++    @Override
++    protected String squareLabel() {
++        return position + "<->";
++    }
++    
++    public void enter(Player player, boolean swapping) {
++        assert this.player == null;
++        this.player = player;
++    }
+ }
+ 
+diff --git a/problemset02/src/snakes/ScrambleUpTest.java b/problemset02/src/snakes/ScrambleUpTest.java
+index 3578e3a..83b265d 100644
+--- a/problemset02/src/snakes/ScrambleUpTest.java
++++ b/problemset02/src/snakes/ScrambleUpTest.java
+@@ -19,7 +19,7 @@ public class ScrambleUpTest {
+ 		jack = new Player("Jack");
+ 		jill = new Player("Jill");
+ 		Player[] args = { jack, jill };
+-		Game game = new Game(6, args);
++		Game game = new Game(12, args);
+ 		game.setSquareToScrambleUp(4);
+ 		assertTrue(game.notOver());
+ 		assertTrue(game.firstSquare().isOccupied());
+@@ -31,14 +31,57 @@ public class ScrambleUpTest {
+ 	
+ 	@Given("newGame")
+ 	public Game jillToScrambleUp(Game game) {
+-	    game.movePlayer(1);
++	    game.movePlayer(1); // jack lands on field 2
++	    assertTrue(game.notOver());
+ 	    assertEquals(2, jack.position());
+ 		assertEquals(1, jill.position());
+-        game.movePlayer(3);
++		assertEquals(jill, game.currentPlayer());
++		
++        game.movePlayer(3); // jill lands on field 4 -> Scramble Up
+ 		assertTrue(game.notOver());
+ 		assertEquals(4, jack.position());
+ 		assertEquals(2, jill.position());
+ 		assertEquals(jack, game.currentPlayer());
++		
+ 		return game;
+ 	}
++	
++	@Given("jillToScrambleUp")
++    public Game notLandingOnField4DoesntScramble(Game game) {
++        game.movePlayer(1); // jack lands on field 5
++        assertTrue(game.notOver());
++        assertEquals(5, jack.position());
++        assertEquals(2, jill.position());
++        assertEquals(jill, game.currentPlayer());
++        
++        return game;
++    }
++	
++	@Given("notLandingOnField4DoesntScramble")
++	public Game jackToScrambleUp(Game game) {
++	    game.movePlayer(4); // jill lands on field 6
++	    assertTrue(game.notOver());
++	    assertEquals(6, jill.position());
++	    assertEquals(5, jack.position());
++	    assertEquals(jack, game.currentPlayer());
++	    
++	    game.movePlayer(1); // jack lands on field 6 -> back to 1
++	    assertTrue(game.notOver());
++	    assertEquals(1, jack.position());
++	    assertEquals(6, jill.position());
++	    assertEquals(jill, game.currentPlayer());
++	    
++	    game.movePlayer(1); // jill lands on field 7
++	    assertTrue(game.notOver());
++	    assertEquals(7, jill.position());
++	    assertEquals(1, jack.position());
++        assertEquals(jack, game.currentPlayer());
++	   
++	    game.movePlayer(3); // jack lands on field 4 -> ScrambleUp
++	    assertTrue(game.notOver());
++	    assertEquals(7, jack.position());
++	    assertEquals(4, jill.position());
++	    
++	    return game;
++	}
+ }
+diff --git a/problemset02/src/snakes/SimpleGameTest.java b/problemset02/src/snakes/SimpleGameTest.java
+index 0b6ce6f..73ba655 100644
+--- a/problemset02/src/snakes/SimpleGameTest.java
++++ b/problemset02/src/snakes/SimpleGameTest.java
+@@ -23,6 +23,8 @@ public class SimpleGameTest {
+ 		game.setSquareToLadder(2, 4);
+ 		game.setSquareToLadder(7, 2);
+ 		game.setSquareToSnake(11, -6);
++		game.setSquareToInstantLose(3);
++		game.setSquareToScrambleUp(4);
+ 		assertTrue(game.notOver());
+ 		assertTrue(game.firstSquare().isOccupied());
+ 		assertEquals(1, jack.position());
+@@ -37,8 +39,10 @@ public class SimpleGameTest {
+ 		assertEquals("Jill", jill.toString());
+ 		assertEquals("[1<Jack><Jill>]", game.firstSquare().toString());
+ 		assertEquals("[2->6]", game.getSquare(2).toString());
++		assertEquals("[3||]", game.getSquare(3).toString());
++		assertEquals("[4<->]", game.getSquare(4).toString());
+ 		assertEquals("[5<-11]", game.getSquare(11).toString());
+-		assertEquals("[1<Jack><Jill>][2->6][3][4][5][6][7->9][8][9][10][5<-11][12]", game.toString());
++		assertEquals("[1<Jack><Jill>][2->6][3||][4<->][5][6][7->9][8][9][10][5<-11][12]", game.toString());
+ 		return game;
+ 	}
+ 	
+diff --git a/problemset02/src/snakes/Square.java b/problemset02/src/snakes/Square.java
+index f65df08..90152c8 100644
+--- a/problemset02/src/snakes/Square.java
++++ b/problemset02/src/snakes/Square.java
+@@ -4,7 +4,7 @@ public class Square implements ISquare {
+ 
+ 	protected int position;
+ 	protected Game game;
+-	private Player player;
++	protected Player player;
+ 
+ 	private boolean invariant() {
+ 		return game != null
+@@ -54,6 +54,11 @@ public class Square implements ISquare {
+ 		assert this.player == null;
+ 		this.player = player;
+ 	}
++	
++	// place holder so we can override it in ScrambleUp
++	public void enter(Player player, boolean swapping) {
++	    enter(player);
++    }
+ 
+ 	public void leave(Player player) {
+ 		assert this.player == player;
