@@ -10,11 +10,11 @@ Users write programs out of four commands, telling a turtle how to walk over the
 <dt>up <i>n</i>
  	<dd>Move the turtle up by <i>n</i> steps. 
 <dt>dn <i>n</i>
-	 <dd>Move the turtle down by <i>n</i> steps.
+	 <dd>Move the turtle down by <i>n</i> steps. 
 <dt> rt <i>n</i> 
-	<dd> Rotate the Turtle <i>n</i> degrees to the right. 
+	<dd> Move the turtle right by <i>n</i> steps. 
 <dt>lt <i>n</i> 
-	<dd>Rotate the Turtle <i>n</i> degrees to the left.
+	<dd>Move the turtle left by <i>n</i> steps. 
 </dl>
 
 The turtle can walk really fast, and it's too small to be seen with the naked eye, but it leaves a trace of red squares behind wherever it goes.
