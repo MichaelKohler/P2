@@ -1,11 +1,15 @@
 package snakes;
 
+/*
+ * AK you should document, what the responsibilities of the class/interface are.
+ */
 public interface ISquare {
     /**
      * Returns the position of the square
      *
      * @return      position of the square
      */
+	// AK does it start counting with 0 or 1? Is the position unique?
 	public int position();
 	
 	/**
@@ -21,6 +25,7 @@ public interface ISquare {
      *
      * @return      boolean value whether it is the first square or not
      */
+	// AK what's so special about the first square?
 	public boolean isFirstSquare();
 	
 	/**
@@ -36,6 +41,7 @@ public interface ISquare {
      * @param  player  the player who should enter this field
      * @return         void
      */
+	// AK what happens if the square is occupied? Should I use this method?
 	public void enter(Player player);
 	
 	/**

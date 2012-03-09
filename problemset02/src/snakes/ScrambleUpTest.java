@@ -84,4 +84,13 @@ public class ScrambleUpTest {
 	    
 	    return game;
 	}
+	
+    /* 
+     * AK: You did check the "change places" part, but not the "randomly". 
+     * While it is hard to do, you will learn techniques for it in our course.
+     * For example, if three players were in the game and when player1 hits
+     * the ScrambleUp square, you would not catch the error, that your code
+     * might switch player2 and player3...
+     */
+
 }

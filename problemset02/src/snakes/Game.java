@@ -6,6 +6,14 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 
+/*
+ * AK Your documentation leaves many questions open, but your implementation is
+ * interesting and you are very observant about the details, e.g. the invariant.
+ * You should be more careful about the documentation in the future, because
+ * I can't always be this lenient, but for this time your problemset02 was
+ * 
+ * ACCEPTED
+ */
 public class Game {
 	private List<ISquare> squares;
 	private int size;
@@ -19,6 +27,7 @@ public class Game {
 			&& players.size() > 1;
 	}
 	
+	// AK well observed!
 	// this is needed since the assertion would be false when a player
 	// lands on the InstantLose field
 	private boolean invariantWithoutPlayerSize() {
