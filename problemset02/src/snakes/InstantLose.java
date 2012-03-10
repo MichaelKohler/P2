@@ -10,7 +10,7 @@ public class InstantLose extends Square implements ISquare {
     public void enter(Player player) {
         assert this.player == null;
         this.player = player;
-        this.player.leaveGame(game, this);
+        this.player.leaveGame(game, this); // AK nice!
     }
 	
 	@Override
