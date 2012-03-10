@@ -1,6 +1,6 @@
 # Accepted.txt
 
-This file contains the grades of the P2 students 2011
+This file contains the grades of the P2 students 2012.
 
 Please check your grades every week and inform us as soon as possible if 
 something is not correct.
@@ -10,37 +10,36 @@ To be admitted for the exam, you need to pass a5 and a5.2 (Ursuppe) and
 
 -------------------------------------------------------------------------------------
 
-                     a01   a02   a03   a04   a05   a06   a07   a5.2   a08   a09   a10
-grouo01
-group02
-group03             
-group04             
-group05             
-group06             
-group07             
-group08
-group09             
-group10             
-group11             
-group12             
-group13             
-group14             
-group15
-group16
-group17
-group18             
-group19             
-group20
-group21
-group22             
-group23             
-group24             
-group25
-group26
-group27
-group28
-group29
-group30             
+                    a01 a02 a03
+grouo01             ok  ok
+group02             ok  nef
+group03             ok  ok
+group04             ok  ok
+group05             ok  nef
+group06             ok  nef
+group07             ++  --
+group08             ok  nef
+group09             ok  ok
+group10             ok  nef
+group11             ok  ok
+group12             ok  ok
+group13             ok  ok
+group14             ok  nef
+group15             ok  ok
+group16             ok  ok
+group17             ok  nef
+group18             ok  nef
+group19             ok  fail
+group20             ok  ok
+group21             nef nef
+group22             ok  ++ (13.3)
+group23             ok  nef
+group24             ok  nef
+group25             ok  ++ (13.3)
+group26             ok  ++ (13.3)
+group27             ok  --
+group29             --  --
+group30             ++  ++ (13.3)
  
   ok:   accepted.
  nef:   revision required by next week.
