@@ -23,6 +23,8 @@ public class SimpleGameTest {
 		game.setSquareToLadder(2, 4);
 		game.setSquareToLadder(7, 2);
 		game.setSquareToSnake(11, -6);
+		game.setSquareToInstantLose(3);
+		game.setSquareToScrambleUp(4);
 		assertTrue(game.notOver());
 		assertTrue(game.firstSquare().isOccupied());
 		assertEquals(1, jack.position());
@@ -37,8 +39,10 @@ public class SimpleGameTest {
 		assertEquals("Jill", jill.toString());
 		assertEquals("[1<Jack><Jill>]", game.firstSquare().toString());
 		assertEquals("[2->6]", game.getSquare(2).toString());
+		assertEquals("[3||]", game.getSquare(3).toString());
+		assertEquals("[4<->]", game.getSquare(4).toString());
 		assertEquals("[5<-11]", game.getSquare(11).toString());
-		assertEquals("[1<Jack><Jill>][2->6][3][4][5][6][7->9][8][9][10][5<-11][12]", game.toString());
+		assertEquals("[1<Jack><Jill>][2->6][3||][4<->][5][6][7->9][8][9][10][5<-11][12]", game.toString());
 		return game;
 	}
 	

@@ -17,6 +17,13 @@ import java.io.FileFilter;
  * @author Lukas Diener 11-123-213
  *
  */
+
+/*
+ * AK you handed in a reasonably structured algorithm which works, and as such, your problemset 1 has been...
+ * 
+ * 
+ * ACCEPTED
+ */
 public class FilePattern implements FileFilter {
 	char[] patternChars;
 	String pattern;
@@ -34,6 +41,7 @@ public class FilePattern implements FileFilter {
 			 * to be the same for both strings. The chars must either match or
 			 * the pattern char has to be a question mark.
 			 */
+			// AK you should move this to a separate `matchWithoutStar` method to clear things up.
 			if(fileNameChars.length != patternChars.length){
 				return false;
 			}
@@ -48,19 +56,19 @@ public class FilePattern implements FileFilter {
 			/* Now match asterisks. Split the pattern on the * sign into parts
 			 * (an additional empty array item has to be added when * is the last
 			 * character), match them one by one and use only the substring left behind
-			 * for teh next match.
+			 * for <del>teh</del> the next match.
 			 * The last part must match the rest of the string exactly if it's not an
 			 * asterisk.
 			 */
 			int counter = -1;
 			String[] parts = pattern.split("\\*");
 			if(pattern.substring(pattern.length()-1).equals("*")){
-				parts = addToArray(parts, "");
+				parts = addToArray(parts, ""); // AK you could use a List instead, which natively allows adding elements
 			}
 
 			for(String part : parts){
 				counter++;
-				if(part.equals("")){}
+				if(part.equals("")){} // AK switch that around, so you avoid empty blocks, e.g. if (!parts.equals("")) { ... }
 				else{
 					int index = fileName.indexOf(part);
 					if(index == -1)

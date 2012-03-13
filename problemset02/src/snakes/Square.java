@@ -4,7 +4,7 @@ public class Square implements ISquare {
 
 	protected int position;
 	protected Game game;
-	private Player player;
+	protected Player player;
 
 	private boolean invariant() {
 		return game != null
@@ -54,6 +54,11 @@ public class Square implements ISquare {
 		assert this.player == null;
 		this.player = player;
 	}
+	
+	// place holder so we can override it in ScrambleUp
+	public void enter(Player player, boolean swapping) {
+	    enter(player);
+    }
 
 	public void leave(Player player) {
 		assert this.player == player;

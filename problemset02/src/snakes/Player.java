@@ -20,6 +20,11 @@ public class Player {
 		square.enter(this);	
 		assert invariant();
 	}
+	
+	public void leaveGame(Game game, Square squareLandedOn) {
+	    square = squareLandedOn;
+	    game.removePlayer(this);
+	}
 
 	public int position() {
 		assert invariant();
@@ -33,12 +38,20 @@ public class Player {
 		square.enter(this);
 	}
 	
+	public void changeWithOtherPlayer(Game game, ScrambleUp squareLandedOn) {
+	    game.exchangePlayers(squareLandedOn, this);
+	}
+	
 	public String toString() {
 		return name;
 	}
 
 	public ISquare square() {
 		return square;
+	}
+
+	public void changeSquare(ISquare newSquare) {
+	    square = newSquare;
 	}
 
 	public boolean wins() {
