@@ -113,6 +113,7 @@ public class TurtleShower extends Panel implements  DocumentListener {
 			throw new RuntimeException(e);
 		}
 		try {
+			System.out.println(description);
 			board = boardMaker.makeBoardFrom(description);
 		} catch(ParserException pe) {
 			board = null;
