@@ -23,7 +23,7 @@ public class Action {
 		this.direction = direction;
 		this.distance = distance;
 	}
-	
+
 	/**
 	 * Returns the direction.
 	 * 

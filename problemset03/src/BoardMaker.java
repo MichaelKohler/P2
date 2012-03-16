@@ -93,7 +93,7 @@ class BoardMaker {
     /**
      * Calls the parser and gets the list of Actions from it.
      * 
-     * The Action list shouldn't have a negativ size, which is checked in the
+     * The Action list shouldn't have a negative size, which is checked in the
      * updatePathInMatrix method.
      * 
      * @param description
@@ -102,7 +102,8 @@ class BoardMaker {
      */
     private ArrayList<Action> callParseInput(String description) {
         ArrayList<Action> actionList = new ArrayList<Action>();
-        actionList = InputParser.parseInput(description);
+        InputParser parser = new InputParser();
+        actionList = parser.parseInput(description);
         return actionList;
     }
 

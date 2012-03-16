@@ -1,6 +1,8 @@
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.List;
+
+import org.codehaus.jparsec.Scanners;
+import org.codehaus.jparsec.functors.Tuple3;
 
 
 /*
@@ -11,55 +13,83 @@ import java.util.regex.Pattern;
  *
  * This class is responsible for parsing a multi-line input string,
  * containing direction commands (lt, rt, dn, up) as well as distances.
- * It returns a list of 
+ * The parseInput method returns a list of |Action| elements.
  */
 
 public class InputParser {
     
-    /* This regular expression finds all occurrences of a string consisting of
-     * one of the four direction commands (at the line start), followed by one
-     * or more whitespace characters, followed by one or more numbers, followed
-     * by the line ending.
-     */
-    private final static Pattern pattern = Pattern.compile("^(up|dn|lt|rt)\\s+(-*[0-9]+)$",
-                                                           Pattern.MULTILINE);
-
-	/**
+    public InputParser(){
+		    //no constructor code.
+	  }
+	
+	/*
 	 * Returns a List of actions based on the input string. If there is no
 	 * valid input, an empty List is returned. The List consists of Instances
 	 * of the Action class, defined in Action.java.
 	 *
 	 * The description string shouldn't be null.
-	 * The returned |actionList|'s size shouldn't be negative.
 	 * 
 	 *
-	 * @param     description    user input to parse
+	 * @param    description    user input to parse
 	 * @return    List<Action>    a list of parsed actions
 	 */
-	public static ArrayList<Action> parseInput(String input){
-	    assert input != null;
-	    ArrayList<Action> actionList = new ArrayList<Action>();
-        Matcher matcher = pattern.matcher(input);
-        
-        while (matcher.find()) {
-            matcher.group();
-            Direction dir = null;
-            if(matcher.group(1).equals("up")){
-                dir = Direction.UP;
-            }
-            if(matcher.group(1).equals("dn")){
-                dir = Direction.DOWN;
-            }
-            if(matcher.group(1).equals("lt")){
-                dir = Direction.LEFT;
-            }
-            if(matcher.group(1).equals("rt")){
-                dir = Direction.RIGHT;
-            }
-            actionList.add(new Action(dir, Integer.parseInt(matcher.group(2))));
-        }
-        
-		assert actionList.size() >= 0;
+	public ArrayList<Action> parseInput(String in){
+		assert in != null;
+		List<Tuple3<Direction, Void, String>> parsedList = inputParser.parse(in);
+		ArrayList<Action> actionList = new ArrayList<Action>();
+		int invalidDirectionCounter = 0;
+		for(int i=0; i<parsedList.size();i++){
+			Direction dir = parsedList.get(i).a;
+			/* This is an ugly hack, because the parser can not choose (or we don't have the knowledge)
+			 * to accept only certain keywords (up, dn, ...). So the parser returns |null| if the direction
+			 * is an invalid string. Has to be caught here.
+			 */
+			if(dir == null){
+				invalidDirectionCounter++;
+				continue;
+			}
+			int dist = Integer.parseInt(parsedList.get(i).c);
+			System.out.println("Parsed "+dir+" "+dist);
+			Action act = new Action(dir, dist);
+			actionList.add(act);
+		}
+		assert actionList.size() == parsedList.size()-invalidDirectionCounter;
 		return actionList;
+	}
+	
+	/*
+	 * This Parser splits the input at the newline character and politely asks actionParser()
+	 * to parse each line. 
+	 */
+	private static org.codehaus.jparsec.Parser<List<Tuple3<Direction, Void, String>>> inputParser = actionParser()
+		.sepBy(Scanners.string("\n"));
+	
+	/*
+	 * The actionParser parses the three following parsers (in this order):
+	 * - direction() (see below)
+	 * - any whitespace			
+	 * - Any integer (the distance)
+	 * and returns a Tuple3 consisting of a |Direction|, void, and an integer
+	 */
+	private static org.codehaus.jparsec.Parser<Tuple3<Direction, Void, String>> actionParser() {
+	    return org.codehaus.jparsec.Parsers.tuple(direction(), Scanners.WHITESPACES, Scanners.INTEGER);
+	}
+			
+	
+	/*
+	 * The direction() parser finds identifiers, and returns the appropriate
+	 * |Direction|. Otherwise, null is returned.
+	 */
+	private static org.codehaus.jparsec.Parser<Direction> direction() {
+		return (Scanners.IDENTIFIER)
+        .map(new org.codehaus.jparsec.functors.Map<String, Direction>() {
+		    public Direction map(String arg0) {
+		        if(arg0.equals("up")) return Direction.UP;
+		        if(arg0.equals("dn")) return Direction.DOWN;
+		        if(arg0.equals("lt")) return Direction.LEFT;
+		        if(arg0.equals("rt")) return Direction.RIGHT;
+		        else return null;
+		    }
+        });
 	}
 }
