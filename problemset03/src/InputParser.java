@@ -44,6 +44,9 @@ public class InputParser {
 			 * to accept only certain keywords (up, dn, ...). So the parser returns |null| if the direction
 			 * is an invalid string. Has to be caught here.
 			 */
+			// AK: Parsers.or(Scanners.string("up"), Scanners.string("dn"), Scanners.string("lt"), Scanners.string("rt")).source()
+			// would do the job (yeah, I had to read that one up too), but then it would not show anything at all, so it might not be what
+			// you want.
 			if(dir == null){
 				invalidDirectionCounter++;
 				continue;
@@ -53,6 +56,7 @@ public class InputParser {
 			Action act = new Action(dir, dist);
 			actionList.add(act);
 		}
+		// AK nice sanity check!
 		assert actionList.size() == parsedList.size()-invalidDirectionCounter;
 		return actionList;
 	}
