@@ -11,35 +11,32 @@ To be admitted for the exam, you need to pass a5 and a5.2 (Ursuppe) and
 -------------------------------------------------------------------------------------
 
                     a01 a02 a03
-grouo01             ok  ok
-group02             ok  nef
-group03             ok  ok
-group04             ok  ok
-group05             ok  nef
-group06             ok  nef
-group07             ++  --
-group08             ok  nef
-group09             ok  ok
-group10             ok  nef
-group11             ok  ok
-group12             ok  ok
-group13             ok  ok
-group14             ok  nef
-group15             ok  ok
-group16             ok  ok
-group17             ok  nef
-group18             ok  nef
-group19             ok  fail
-group20             ok  ok
-group21             nef nef
-group22             ok  ++ (13.3)
-group23             ok  nef
-group24             ok  nef
-group25             ok  ++ (13.3)
-group26             ok  ++ (13.3)
-group27             ok  --
-group29             --  --
-group30             ++  ++ (13.3)
+grouo01             ok  ok  nef
+group02             ok  nef nef
+group03             ok  ok  wow
+group04             ok  ok  ok
+group05             ok  ok  ok
+group06             ok  ok  nef
+group08             ok  ok  ok
+group09             ok  ok  wow
+group10             ok  ok  nef
+group11             ok  ok  nef
+group12             ok  ok  wow
+group13             ok  ok  ok
+group14             ok  ok  ++ (21.3)
+group15             ok  ok  ok
+group16             ok  ok  ok
+group17             ok  ok  ++ (21.3)
+group18             ok  ok  ok
+group19             ok  nef ok
+group20             ok  ok  wow
+group22             ok  ++  --
+group23             ok  nef nef
+group24             ok  ok  ok
+group25             ok  nef ++ (19.3)
+group26             ok  nef -- (13.3)
+group29             ok  --  --
+group30             ok  nef ++ (20.3)
  
   ok:   accepted.
  nef:   revision required by next week.
