@@ -1,0 +1,44 @@
+# Design by Contract, Week 3 #
+
+Deadline: Friday, 16 March, 12.00, noon.
+
+ACME Inc. has decided to make a fun little toy for kids to learn programming with: the turtle language!
+
+Users write programs out of four commands, telling a turtle how to walk over the screen.
+
+<dl>
+<dt>up <i>n</i>
+ 	<dd>Move the turtle up by <i>n</i> steps. 
+<dt>dn <i>n</i>
+	 <dd>Move the turtle down by <i>n</i> steps.
+<dt> rt <i>n</i> 
+	<dd> Rotate the Turtle <i>n</i> degrees to the right. 
+<dt>lt <i>n</i> 
+	<dd>Rotate the Turtle <i>n</i> degrees to the left.
+</dl>
+
+The turtle can walk really fast, and it's too small to be seen with the naked eye, but it leaves a trace of red squares behind wherever it goes.
+
+For example, here is a turtle program and the resulting trace:
+![Turtle trace](turtle-trace.png "Turtle trace")
+
+In your project, you'll find an empty class `BoardMaker`, which accepts the user program and returns a 100 by 100 boolean matrix, marking for every square whether it's been touched by the turtle or not. Implement this class.
+
+Your solution *MUST* meet the following criteria:
+
+ * In your implementation, make sure that  parsing and execution of programs happens in separate objects. 
+ * In your API documentation, make explicit all pre- and post conditions.
+ * Your solution must check at least *some* pre- and postconditions, using `assert` statements.
+ * Your solution must reasonably deal with all input programs, in exactly the place that your contracts prescribe.
+ * The class comment of all your classes should accurately describe the responsibility of the class.
+ * Include a UML diagram that communicates the connection between your classes.
+
+You *SHOULD*:
+
+ * Your solution should use the [jParsec](http://jparsec.codehaus.org/jparsec+Overview) parser combinator framework to parse the user input. While we'll accept solutions that don't use it, a future task will require a more complex grammar to be parsed with jParsec. We recommend using this task to get warm with jParsec.
+ * Read "Applying 'Design by contact'" by Bertrand Meyer. It's in the "papers" folder at the root of the repository. Its contents are relevant to the exam.
+ * Make sure that you're using Java 1.6 and that assertions are turned on.
+
+
+
+ACME Inc. thanks you for your cooperation to making the world a little funner!

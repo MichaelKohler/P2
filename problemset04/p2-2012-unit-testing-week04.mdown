@@ -1,0 +1,16 @@
+# Problemset 04, Unit Testing
+
+Due to your outstanding performance in programming, you've been hired by the prestigious ACME Inc, Programming division. Your first task is to improve some legacy code present at the company by adding tests. The company still holds on to some snakes and ladders game, as well as a turtle game.
+
+## Mocking frameworks.
+You'll need to improve testing in the snakes and ladders game using mock objects. A test coverage tool revealed that in the problemset02 folder, Game#play(Die) currently isn't covered by any unit test. Your new boss claims that this could be easily tested using "mock objects". He can't explain what they are, but he insists you use them. We suggest the following course of action.
+
+Use Eclipse's "Extract interface" refactoring to create an interface for `Die` called `IDie`. In the problemset02 folder, write a new class `GameTest`. There, write a test method that tests  Game#play(IDie). As a parameter to the method, pass a mock of IDie. To achieve that, [Familiarize yourself with the Mockito framework](http://code.google.com/p/mockito/). Using it, add more tests to the project that use mocks.
+
+## Improve the unit tests in the turtle game
+The CTO also noticed that the unit tests in your turtle game could benefit from using [Hamcrest](http://junit.org/apidocs/index.html). Hamcrest allows to write fluent comparisons in tests, for example `assertThat(game.currentPlayer(), isNull())`. JUnit by default ships a rudimentary set of matchers in package `org.hamcrest.core`. You don't need to import anything (and you better don't, since importing a full Hamcrest will probably name clash with Eclipse's JUnit).
+
+We suggest you go thru your solution to problemset03, and make sure that all parts, especially the error handling, are properly tested. Re-write some of your unit tests to use Hamcrest's syntax. See [Stackoverflow](http://stackoverflow.com/questions/1836364/bad-form-for-junit-test-to-throw-exception) to see how to test that an exception is thrown. Use Hamcrest to make sure that it prints a useful error message when the assertion fails, like the CTO wants it. 
+
+## Responsibility-driven design
+Read the responsibility-driven design paper in the papers subfolders. Armed with your new knowledge, identify the responsibilities of all classes in problemset02 (except for tests) and note them in a sentence in the class comment of their classes.
