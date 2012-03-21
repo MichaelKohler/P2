@@ -30,7 +30,7 @@ group17             ok  ok  ++ (21.3)
 group18             ok  ok  ok
 group19             ok  nef ok
 group20             ok  ok  wow
-group22             ok  ++  --
+group22             ok  ok  ++ (18.3)
 group23             ok  nef nef
 group24             ok  ok  ok
 group25             ok  nef ++ (19.3)
