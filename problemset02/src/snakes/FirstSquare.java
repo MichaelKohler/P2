@@ -3,6 +3,10 @@ package snakes;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * The |FirstSquare| is the first square on the board holding all players in
+ * the beginning and every player who lands on an occupied square.
+ */
 public class FirstSquare extends Square {
 
 	private List<Player> players;

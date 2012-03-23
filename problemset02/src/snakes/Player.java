@@ -1,5 +1,8 @@
 package snakes;
 
+/*
+ * A |Player| is a player in the game defining all actions players can do.
+ */
 public class Player {
 	
 	private String name;

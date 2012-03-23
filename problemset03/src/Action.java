@@ -48,4 +48,23 @@ public class Action {
 	public int getDistance(){
 		return this.distance;
 	}
+	
+	@Override
+	public boolean equals(Object other) {
+	    if(other == this) {
+	      return true;
+	    }
+	    if(!(other instanceof Action)) {
+	      return false;
+	    }
+	 
+	    Action p = (Action) other;
+	    return this.direction.equals(p.direction) &&
+	      this.distance == p.distance;
+	}
+	
+	@Override
+	public String toString(){
+		return this.direction+" "+this.distance;
+	} 
 }

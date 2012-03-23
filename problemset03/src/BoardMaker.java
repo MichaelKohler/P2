@@ -191,9 +191,9 @@ class BoardMaker {
      * @return void
      */
     private void moveUp(int steps) {
-        for (int i = 1; i <= steps; i++) {
-            if (this.currentPositionY - 1 >= 0) {
-                this.board[this.currentPositionX][this.currentPositionY - 1] = true;
+        for (int i = 0; i < steps; i++) {
+            if (this.currentPositionY >= 0) {
+                this.board[this.currentPositionX][this.currentPositionY] = true;
                 this.currentPositionY--;
             }
         }
@@ -211,9 +211,9 @@ class BoardMaker {
      * @return void
      */
     private void moveDown(int steps) {
-        for (int i = 1; i <= steps; i++) {
-            if (this.currentPositionY + 1 <= 99) {
-                this.board[this.currentPositionX][this.currentPositionY + 1] = true;
+        for (int i = 0; i < steps; i++) {
+            if (this.currentPositionY <= 99) {
+                this.board[this.currentPositionX][this.currentPositionY] = true;
                 this.currentPositionY++;
             }
         }
@@ -231,9 +231,9 @@ class BoardMaker {
      * @return void
      */
     private void moveLeft(int steps) {
-        for (int i = 1; i <= steps; i++) {
-            if (this.currentPositionX - 1 >= 0) {
-                this.board[this.currentPositionX - 1][this.currentPositionY] = true;
+        for (int i = 0; i < steps; i++) {
+            if (this.currentPositionX >= 0) {
+                this.board[this.currentPositionX][this.currentPositionY] = true;
                 this.currentPositionX--;
             }
         }
@@ -251,9 +251,9 @@ class BoardMaker {
      * @return void
      */
     private void moveRight(int steps) {
-        for (int i = 1; i <= steps; i++) {
-            if (this.currentPositionX <= 98) {
-                this.board[this.currentPositionX + 1][this.currentPositionY] = true;
+        for (int i = 0; i < steps; i++) {
+            if (this.currentPositionX <= 99) {
+                this.board[this.currentPositionX][this.currentPositionY] = true;
                 this.currentPositionX++;
             }
         }

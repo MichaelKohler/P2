@@ -1,5 +1,8 @@
 package snakes;
 
+/*
+ * A |Square| is a field on our game board holding one player.
+ */
 public class Square implements ISquare {
 
 	protected int position;

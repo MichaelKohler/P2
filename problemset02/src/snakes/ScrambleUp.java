@@ -1,5 +1,9 @@
 package snakes;
 
+/*
+ * The |ScrambleUp| field is a normal board field which
+ * scrambles up the player landing on it with a random player.
+ */
 public class ScrambleUp extends Square implements ISquare {
 
     public ScrambleUp(Game game, int position) {

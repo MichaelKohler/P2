@@ -9,7 +9,7 @@ public class DieTest {
 	
 	@Test
 	public void testInRange() {
-		Die die = new Die();
+		IDie die = new Die();
 		for (int i = 1;i<=MAX;i++) {
 			int result = die.roll();
 			assertTrue(result >= 1 && result <= Die.FACES);
@@ -27,7 +27,7 @@ public class DieTest {
 	}
 	
 	private boolean reached(int value) {
-		Die die = new Die();
+		IDie die = new Die();
 		for (int i = 1; i<=MAX; i++) {
 			if (die.roll() == value) {
 				return true;

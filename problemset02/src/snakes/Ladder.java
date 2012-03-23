@@ -1,5 +1,8 @@
 package snakes;
 
+/*
+ * A |Ladder| is a field with a upwards transport mechanism.
+ */
 public class Ladder extends Square {
 
 	private int transport;

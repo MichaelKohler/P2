@@ -1,5 +1,8 @@
 package snakes;
 
+/*
+ * The |Game| is the core class which defines everything general about the game.
+ */
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -51,7 +54,7 @@ public class Game {
 		(new SimpleGameTest()).newGame().play(new Die());
 	}
 
-	public void play(Die die) {
+	public void play(IDie die) {
 		System.out.println("Initial state: " + this);
 		while (this.notOver()) {
 			int roll = die.roll();

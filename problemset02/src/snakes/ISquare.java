@@ -2,6 +2,9 @@ package snakes;
 
 /*
  * AK you should document, what the responsibilities of the class/interface are.
+ * 
+ * For Problemset04:
+ * The |ISquare| is the interface from which is implemented by all other squares.
  */
 public interface ISquare {
     /**

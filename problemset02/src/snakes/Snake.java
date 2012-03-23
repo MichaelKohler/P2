@@ -1,5 +1,8 @@
 package snakes;
 
+/*
+ * A |Snake| is a |Ladder| with a down transport mechanism.
+ */
 public class Snake extends Ladder {
 
 	public Snake(int transport, Game game, int position) {

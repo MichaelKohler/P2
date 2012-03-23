@@ -1,5 +1,8 @@
 package snakes;
 
+/*
+ * The |InstantLose| is a field which lets the player landing on it lose.
+ */
 public class InstantLose extends Square implements ISquare {
 
 	public InstantLose(Game game, int position) {
