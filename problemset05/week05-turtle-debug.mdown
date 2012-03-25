@@ -1,0 +1,54 @@
+# Debugging, Week 5 #
+
+Deadline: Friday, 30 March, 12.00, noon.
+
+ACME Inc. has decided to enhance the turtle language! But your boss doesn't understand the proper use of debuggers. During your next project, he asks you to use it and document your usage, so he can learn from your wisdom.
+
+In the enhanced turtle language, users write programs out of four commands, telling a turtle how to walk over the screen. Except this time, the turtle rotates in degrees.
+
+<dl>
+<dt>fd <i>n</i>
+ 	<dd>Move the turtle forward by <i>n</i> steps. 
+<dt>bd <i>n</i>
+	 <dd>Move the turtle backward by <i>n</i> steps. 
+<dt>rt <i>n</i> 
+	<dd> Rotate the turtle right by <i>n</i> degrees. 
+<dt>lt <i>n</i> 
+	<dd>Rotate the turtle left by  <i>n</i> degrees. 
+<dt>to <i>commandName</i> [ <i>command</i> … ]
+	<dd>Teach the turtle the new command <i>commandName</i>
+<dt>repeat <i>n</i> [ <i>command</i> … ]
+	<dd>Repeat the command sequence <i>n</i> times.
+</dl>
+
+That is, our turtle can now point into a direction, and it can learn new commands, for example:
+
+	fd 100
+	lt 100
+	fd 100
+	rt 90
+	to square [
+	   repeat 4 [ fd 100 lt 90 ]
+	]
+	repeat 4 [square  lt 9 ] 
+	
+	
+Which will draw something like the following:	
+
+![Turtle output](turtle-output.png)
+
+As it always happens, you certainly will run into a situation where you don't understand your own solution. At that point, please use the debugger. Take a screenshot, and use it to explain how a debugger can help you solve the problem. Hand in your screenshots linked into a [Markdown](http://daringfireball.net/projects/markdown/) sheet that contains the explanations. Your markdown sheet must contain at least 3 problems that you fixed.
+
+Your solution should meet the following criteria:
+
+ * Your solution must use the [jParsec](http://jparsec.codehaus.org/jparsec+Overview) parser combinator framework to parse the user input. 
+ * Your debugger explanation must be in a file named `debugger.mdown`, in proper markdown syntax, containing screenshots and explanations of at least 3 cases where the debugger helped you understand what was going on. 
+ * Your solution must use the new `ShowTurtle` skeleton found in the problemset04 folder. Note that it's different: you convert the language into a list of lines, rather than into an array of booleans.
+ * In your implementation, you should keep the AST that the parser generates separate from the class that executes instructions.
+ * You should show up at the pool hour on Tuesday afternoon if you have any trouble solving this exercise. 
+ * Note that this week is more about the proper use of a debugger than about the exact implementation, which we will take into account when looking at your solution. 
+
+## Note ##
+Uniquely for this problemset, we will tolerate slightly incomplete solutions that still show proper knowledge of how to use the debugger.
+
+ACME Inc. thanks you for your cooperation to making the world a little funner!
