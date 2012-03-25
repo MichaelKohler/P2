@@ -5,7 +5,7 @@ package snakes;
  */
 public class Snake extends Ladder {
 
-	public Snake(int transport, Game game, int position) {
+	public Snake(int transport, IGame game, int position) {
 		super(transport, game, position);
 	}
 

@@ -5,7 +5,7 @@ package snakes;
  */
 public class InstantLose extends Square implements ISquare {
 
-	public InstantLose(Game game, int position) {
+	public InstantLose(IGame game, int position) {
 		super(game, position);
 	}
 	

@@ -15,11 +15,11 @@ public class ScrambleUpTest {
 	private Player jill;
 
 	@Test
-	public Game newGame() {
+	public IGame newGame() {
 		jack = new Player("Jack");
 		jill = new Player("Jill");
 		Player[] args = { jack, jill };
-		Game game = new Game(12, args);
+		IGame game = new Game(12, args);
 		game.setSquareToScrambleUp(4);
 		assertTrue(game.notOver());
 		assertTrue(game.firstSquare().isOccupied());
@@ -30,7 +30,7 @@ public class ScrambleUpTest {
 	}
 	
 	@Given("newGame")
-	public Game jillToScrambleUp(Game game) {
+	public IGame jillToScrambleUp(IGame game) {
 	    game.movePlayer(1); // jack lands on field 2
 	    assertTrue(game.notOver());
 	    assertEquals(2, jack.position());
@@ -47,7 +47,7 @@ public class ScrambleUpTest {
 	}
 	
 	@Given("jillToScrambleUp")
-    public Game notLandingOnField4DoesntScramble(Game game) {
+    public IGame notLandingOnField4DoesntScramble(IGame game) {
         game.movePlayer(1); // jack lands on field 5
         assertTrue(game.notOver());
         assertEquals(5, jack.position());
@@ -58,7 +58,7 @@ public class ScrambleUpTest {
     }
 	
 	@Given("notLandingOnField4DoesntScramble")
-	public Game jackToScrambleUp(Game game) {
+	public IGame jackToScrambleUp(IGame game) {
 	    game.movePlayer(4); // jill lands on field 6
 	    assertTrue(game.notOver());
 	    assertEquals(6, jill.position());

@@ -6,7 +6,7 @@ package snakes;
  */
 public class ScrambleUp extends Square implements ISquare {
 
-    public ScrambleUp(Game game, int position) {
+    public ScrambleUp(IGame game, int position) {
         super(game, position);
     }
 

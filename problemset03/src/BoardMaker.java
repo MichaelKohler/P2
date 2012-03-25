@@ -192,7 +192,7 @@ class BoardMaker {
      */
     private void moveUp(int steps) {
         for (int i = 0; i < steps; i++) {
-            if (this.currentPositionY >= 0) {
+            if (this.currentPositionY >= 0) { // AK this seems wrong, it leads to allowing the assertion in the end to fail.
                 this.board[this.currentPositionX][this.currentPositionY] = true;
                 this.currentPositionY--;
             }

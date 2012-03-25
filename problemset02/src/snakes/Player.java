@@ -18,13 +18,13 @@ public class Player {
 		// invariant holds only after joining a game
 	}
 
-	public void joinGame(Game game) {
+	public void joinGame(IGame game) {
 		square = game.firstSquare();
 		square.enter(this);	
 		assert invariant();
 	}
 	
-	public void leaveGame(Game game, Square squareLandedOn) {
+	public void leaveGame(IGame game, Square squareLandedOn) {
 	    square = squareLandedOn;
 	    game.removePlayer(this);
 	}
@@ -41,7 +41,7 @@ public class Player {
 		square.enter(this);
 	}
 	
-	public void changeWithOtherPlayer(Game game, ScrambleUp squareLandedOn) {
+	public void changeWithOtherPlayer(IGame game, ScrambleUp squareLandedOn) {
 	    game.exchangePlayers(squareLandedOn, this);
 	}
 	

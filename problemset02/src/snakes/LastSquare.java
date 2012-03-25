@@ -6,7 +6,7 @@ package snakes;
  */
 public class LastSquare extends Square {
 
-	public LastSquare(Game game, int position) {
+	public LastSquare(IGame game, int position) {
 		super(game, position);
 	}
 

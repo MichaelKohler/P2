@@ -11,7 +11,7 @@ public class FirstSquare extends Square {
 
 	private List<Player> players;
 
-	public FirstSquare(Game game, int position) {
+	public FirstSquare(IGame game, int position) {
 		super(game, position);
 		players = new ArrayList<Player>();
 	}

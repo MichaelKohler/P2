@@ -26,7 +26,9 @@ public class BoardMakerTest {
 		/* This is a test for the dn 12 action. First index contains
 		 * an array with 12 true fields
 		 */
-		
+		// AK using control structures in tests is a dangerous thing -
+		// in this case, it seems difficult to avoid it, but in general,
+		// prefer literals and simple constructions.
 		boardDn12 = new boolean[100];
 		for(int i=0; i<100; i++){
 			boardDn12[i] = false;
@@ -69,7 +71,7 @@ public class BoardMakerTest {
 	@Test
 	public void testBoardMaker() {
 		BoardMaker maker1 = new BoardMaker();
-		assertThat(maker1, is(notNullValue()));
+		assertThat(maker1, is(notNullValue())); // AK this test isn't actually testing anything
 		/* Probably nothing more to test */
 	}
 
@@ -86,7 +88,7 @@ public class BoardMakerTest {
 		assertThat(board1, is(notNullValue()));
 		assertThat(board1, Matchers.hasItemInArray(boardDn12));
 		
-		
+		// AK Make tests as small as possible, so that you can isolate errors
 		/* When moving up at the start, only [0,0] should be
 		 * painted.
 		 */

@@ -9,7 +9,7 @@ import org.junit.Test;
 public class InstantLoseTest {
     private Player jack;
     private Player jill;
-    private Game game;
+    private IGame game;
 
     @Test
     public void initTestScenario() {

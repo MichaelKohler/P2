@@ -6,7 +6,7 @@ package snakes;
 public class Square implements ISquare {
 
 	protected int position;
-	protected Game game;
+	protected IGame game;
 	protected Player player;
 
 	private boolean invariant() {
@@ -14,7 +14,7 @@ public class Square implements ISquare {
 			&& game.isValidPosition(position);
 	}
 
-	public Square(Game game, int position) {
+	public Square(IGame game, int position) {
 		this.game = game;
 		this.position = position;
 		assert invariant();
