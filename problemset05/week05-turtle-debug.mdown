@@ -43,7 +43,7 @@ Your solution should meet the following criteria:
 
  * Your solution must use the [jParsec](http://jparsec.codehaus.org/jparsec+Overview) parser combinator framework to parse the user input. 
  * Your debugger explanation must be in a file named `debugger.mdown`, in proper markdown syntax, containing screenshots and explanations of at least 3 cases where the debugger helped you understand what was going on. 
- * Your solution must use the new `ShowTurtle` skeleton found in the problemset04 folder. Note that it's different: you convert the language into a list of lines, rather than into an array of booleans.
+ * Your solution must use the new skeleton found in the problemset05 folder. Note that it's different: you convert the language into a list of lines, rather than into an array of booleans.
  * In your implementation, you should keep the AST that the parser generates separate from the class that executes instructions.
  * You should show up at the pool hour on Tuesday afternoon if you have any trouble solving this exercise. 
  * Note that this week is more about the proper use of a debugger than about the exact implementation, which we will take into account when looking at your solution. 
