@@ -20,7 +20,7 @@ group06             ok  ok  nef
 group08             ok  ok  ok  nef
 group09             ok  ok  wow ok
 group10             ok  ok  nef
-group11             ok  ok  nef ok
+group11             ok  ok  ok  ok
 group12             ok  ok  wow
 group13             ok  ok  ok  nef
 group14             ok  ok  ++
