@@ -21,14 +21,14 @@ group08             ok  ok  ok  nef
 group09             ok  ok  wow ok
 group10             ok  ok  ok  --
 group11             ok  ok  ok  ok
-group12             ok  ok  wow nef
+group12             ok  ok  wow nef ++
 group13             ok  ok  ok  nef
 group14             ok  ok  ++  ok
 group15             ok  ok  ok  nef
 group16             ok  ok  ok  ok
 group17             ok  ok  ok  ++ (26.4)
 group18             ok  ok  ok  ok
-group19             ok  ok  ok  ++
+group19             ok  ok  ok  ++  ++ (4.4)
 group20             ok  ok  wow ok
 group22             ok  ok  ++  ++ (25.4)
 group23             ok  ok  ok  wow
