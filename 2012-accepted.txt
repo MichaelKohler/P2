@@ -10,33 +10,33 @@ To be admitted for the exam, you need to pass a5 and a5.2 (Ursuppe) and
 
 -------------------------------------------------------------------------------------
 
-                    a01 a02 a03
-grouo01             ok  ok  nef
-group02             ok  ok  nef
-group03             ok  ok  wow
-group04             ok  ok  ok
-group05             ok  ok  ok
-group06             ok  ok  nef
-group08             ok  ok  ok
-group09             ok  ok  wow
-group10             ok  ok  nef
-group11             ok  ok  nef
-group12             ok  ok  wow
-group13             ok  ok  ok
-group14             ok  ok  ++ (21.3)
-group15             ok  ok  ok
-group16             ok  ok  ok
-group17             ok  ok  ++ (21.3)
-group18             ok  ok  ok
-group19             ok  ok  ok
-group20             ok  ok  wow
-group22             ok  ok  ++ (18.3)
-group23             ok  ok  nef
-group24             ok  ok  ok
-group25             ok  nef ++ (19.3)
-group26             ok  nef -- (13.3)
-group29             ok  ok  --
-group30             ok  nef ++ (20.3)
+                    a01 a02 a03 a04
+group01             ok  ok  ok  ok
+group02             ok  ok  ok  nef
+group03             ok  ok  wow wow
+group04             ok  ok  ok  ok
+group05             ok  ok  ok  nef
+group06             ok  ok  ok  wow
+group08             ok  ok  ok  nef
+group09             ok  ok  wow ok
+group10             ok  ok  ok  --
+group11             ok  ok  ok  ok
+group12             ok  ok  wow nef
+group13             ok  ok  ok  nef
+group14             ok  ok  ++  ok
+group15             ok  ok  ok  nef
+group16             ok  ok  ok  ok
+group17             ok  ok  ok  ++ (26.4)
+group18             ok  ok  ok  ok
+group19             ok  ok  ok  nef
+group20             ok  ok  wow ok
+group22             ok  ok  ++  ++ (25.4)
+group23             ok  ok  ok  wow
+group24             ok  ok  ok  ok
+group25             ok  nef ok  ++ (26.4)
+group26             ok  nef --  ok
+group29             ok  ok  --  --
+group30             ok  nef ++  ++ (26.4)
  
   ok:   accepted.
  nef:   revision required by next week.
