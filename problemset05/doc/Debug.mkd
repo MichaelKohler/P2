@@ -1,0 +1,65 @@
+# Debugging Information for ProblemSet05 #
+
+In this document we describe how we used the debugger. We didn't scale the screenshot since this would decrease readability.
+
+## 1. Verifying behaviour ##
+
+We needed to know whether the parser already works so we used the debugger to see the <i>actionList</i> returned from the parser. We  activated a breakpoint on line 44 which is right after the initialisation of <i>actionList</i>.
+
+	List<Action> actionList = callParseInput(description);
+        	assembleLineList(actionList);
+	
+	
+![actionList](actionList.png)
+
+
+The content of the List yielded <i>[rt 5]</i>, so it worked correctly.
+
+
+
+## 2. map method ##
+
+We had the problem that we didn't know exactly how the values in the
+method call in the <i>map()</i> function of our <i>methodDefinition()</i> were structured.
+After a first try to map them (which didn't work), we set a breakpoint
+at the first line of the method, in order to be able to examine the passed
+values <i>(Object[] from)</i>.
+
+We were able to see that at position 1 of the array, our function got the
+method name
+
+![Screen 1.1](screen1.1.png)
+
+and at position 5, the body of the method was
+passed as a List of <i>|Action|</i>.
+
+![Screen 1.2](screen1.2.png)
+
+
+
+## 3.HashMap ##
+
+Another problem we had was that we weren't sure whether user-defined methods
+were actually written to the definitions list. For that, we wrote a test that
+parsed a string with a method definition and set a breakpoint at the next possible
+position. We were then able to examine the value of the "methods" <i>HashMap</i> (now <i>"methodBodies"</i>).
+
+![Screen 2](screen2.png)
+
+
+
+## 4. NullReferenceException ##
+
+We always got a <i>NullReferenceException</i> in <i>TurtleShower.java</i> on the line
+
+		g2d.draw(line)
+
+We didn't really expect that so we set a breakpoint to examine the value of line. And it was <i>null</i>.
+
+![Screen 3.1](screen3.1.png)
+
+We remembered that we created a line which was <i>null</i> (in <i>getLineForAction()</i>) for every rotation
+command, since there is nothing to be drawn by just rotating.
+
+To prevent the <i>NullReferenceException</i>, we added a code that checks if a line is <i>null</i>
+in our <i>assembleLineList()</i>. The next time we ran the debugger, line was always != <i>null</i>.

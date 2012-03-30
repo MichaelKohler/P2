@@ -1,0 +1,48 @@
+1. Verifying behaviour
+
+We needed to know whether the parser already works so we used the debugger to see the actionList returned from the parser. We  activated a breakpoint on line 44 which is right after the initialisation of actionList.
+
+The content of the List yielded [rt 5], so it worked correctly.
+
+[actionList]
+
+
+2. map method
+
+We had the problem that we didn't know exactly how the values in the
+method call in the "map()" function of our "methodDefinition()" were structured.
+After a first try to map them (which didn't work), we set a breakpoint
+at the first line of the method, in order to be able to examine the passed
+values (Object[] from).
+
+We were able to see that at position 1 of the array, our function got the
+method name
+
+[screen1.1.png]
+
+and at position 5, the body of the method was
+passed as a List of |Action|.
+
+[screen1.2.png]
+
+3.HasMap
+
+Another problem we had was that we weren't sure whether user-defined methods
+were actually written to the definitions list. For that, we wrote a test that
+parsed a string with a method definition and set a breakpoint at the next possible
+position. We were then able to examine the value of the "methods" HashMap (now "methodBodies").
+[screen2.png]
+
+4. NullReferenceException
+
+We always got a NullReferenceException in TurtleShower.java on the line g2d.draw(line).
+We didn't really expect that so we set a breakpoint to examine the value of line. And it was null.
+
+[screen3.1.jpg]
+
+We remembered that we created a line which was null (in getLineForAction()) for every rotation
+command, since there is nothing to be drawn by just rotating.
+
+To prevent the NullReferenceException, we added a code that checks if a line is null
+in our assembleLineList().
+The next time we ran the debugger, line was always != null.
