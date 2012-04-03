@@ -5,7 +5,7 @@ This file contains the grades of the P2 students 2012.
 Please check your grades every week and inform us as soon as possible if 
 something is not correct.
 
-To be admitted for the exam, you need to pass a5 and a5.2 (Ursuppe) and
+To be admitted for the exam, you need to pass a6 and a6.2 (Ursuppe) and
 7 out of the remaining 9.
 
 -------------------------------------------------------------------------------------
