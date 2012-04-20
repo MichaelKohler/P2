@@ -1,0 +1,64 @@
+This exercise introduces you to refactoring, inheritance and dependency injection.
+
+# Task 1: Dependency injection #
+
+ACME Inc. is between projects and desperately in the need for problems to solve. Their eyes fell upon the Ursuppe game, which still isn't using dependency injection.
+
+As their top consultant, you've been called to the rescue. Your new supervisor, a guy who does not even know whether it's pull or push that gets new code from the server, has heard about a wonderful technique that they use at Google. As he informs you, it's called [Guice](http://code.google.com/p/google-guice/), and what works for Google ought to work for you! So go and use it!
+
+
+## Task 1.1: Make yourself familiar with dependency injection ##
+Work your way through the [Guice documentation](http://code.google.com/p/google-guice/wiki/GettingStarted) to get familiar with the topic of dependency injection and Guice. You may find the relevant [google tech talk](http://www.youtube.com/watch?v=hBVJbzAagfs) helpful. 
+
+## Task 1.2: Refactor Ursuppe towards dependency injection ##
+
+You should follow the following guidelines.
+
+####Your implementation of Ursuppe should use dependency injection for *all* instantiation of objects.####
+
+That is, in your class `Game`, never write 
+
+	new Player().play();
+
+Instead, write
+
+	playerProvider.get().play();
+
+Of course, for this to work, you will have to get a `playerProvider` thru dependency injection. Like this:
+
+	final Provider<Player> playerProvider;
+	@Inject
+	Game(Provider<Player> playerProvider) {
+		this.playerProvider = playerProvider;
+	}
+
+For details, see the aforementioned Guice documentation.
+
+#### Make sure that random effects are being injected ####
+
+Ursuppe uses random effects, requiring the use of a game die. Make sure that the game die is being *injected*, in the sense of Guice. In tests, a mock die should be injected, which is not random. Make sure that such a test exists.
+
+# Task 2: Follow coding guidelines #
+After some heavy binging, the ACME Inc. CEO actually opened one of the many programming books flying around his company. Thru a rare stroke of luck, the book he happened to open was the excellent "Effective Java, Second Edition", by Joshua Bloch. (It's in the papers folder in your git repo.) The book is full of useful guidelines, that in many ways represents the state of the art style-guide to idiomatic Java programming. Of course, drunk as he is, the CEO isn't attempting to read it, but instead is found throwing darts at the table of contents, choosing the following principles to be eternal rules of proper coding at ACME Inc. You must follow them all.
+
+- Item 2: Consider a builder when faced with many constructor parameters
+- Item 9: Always override hashCode when you override equals.
+- Item 10: Always override `toString`.
+- Item 15: Minimize mutability
+
+In short (for details, see Bloch's excellent book. It's in the papers folder in your git repo.):
+
+### Item 2: Consider a builder when faced with many constructor parameters ###
+Your constructors should never do any serious work. If the creation of an object is serious work, it should be done by a dedicated object, a `Provider`, `Builder`, or a `Factory`. (The differences between these three are largely philosophical, but are, sadly, partly enforced in Guice: Guice makes a distinction between Providers and Factories.) In your code, this almost certainly involves the creation of the board of the game. 
+
+### Item 9: Always override hashCode when you override equals. ###
+This is a straight consequence of the contract of [equals](http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html#equals(java.lang.Object)).
+
+### Item 10: Always override `toString`. ###
+This makes it possible to use the output of `toString` in unit tests.
+
+### Item 15: Minimize mutability ###
+Whenever possible, declare instance variables final. Whenever possible, use 
+[unmodifiable lists](http://docs.oracle.com/javase/6/docs/api/java/util/Collections.html#unmodifiableList(java.util.List) 
+instead of plain lists. Whenever possible, do not return modifiable objects thru public methods. Whenever possible, if you receive a modifiable object thru
+a public method or a constructor, try to copy it.
