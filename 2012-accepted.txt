@@ -6,16 +6,16 @@ Please check your grades every week and inform us as soon as possible if
 something is not correct.
 
 To be admitted for the exam, you need to pass a6 (Ursuppe) and
-7 out of the remaining 9.
+8 out of the remaining 10.
 
 -------------------------------------------------------------------------------------
 
-                    a01 a02 a03 a04 a05 a06 
+                    a01 a02 a03 a04 a05 a06 a07 a08 a09 a10 a11
 group01             ok  ok  ok  ok  ok  ok
 group02             ok  ok  ok  ok  ok
-group03             ok  ok  wow wow wow
+group03             ok  ok  wow wow wow nef
 group04             ok  ok  ok  ok  wow ok
-group05             ok  ok  ok  ok  ok
+group05             ok  ok  ok  ok  ok  wow
 group06             ok  ok  ok  wow ok  ++ (27.4)
 group08             ok  ok  ok  ok  wow nef
 group09             ok  ok  wow ok  wow ++ (27.4)
