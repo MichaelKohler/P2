@@ -5,17 +5,17 @@ This file contains the grades of the P2 students 2012.
 Please check your grades every week and inform us as soon as possible if 
 something is not correct.
 
-To be admitted for the exam, you need to pass a6 and a6.2 (Ursuppe) and
-7 out of the remaining 9.
+To be admitted for the exam, you need to pass a6 (Ursuppe) and
+8 out of the remaining 10.
 
 -------------------------------------------------------------------------------------
 
-                    a01 a02 a03 a04 a05 a06
-group01             ok  ok  ok  ok  ok  ok
+                    a01 a02 a03 a04 a05 a06 a07 a08 a09 a10 a11     admitted
+group01             ok  ok  ok  ok  ok  ok                          
 group02             ok  ok  ok  ok  ok
-group03             ok  ok  wow wow wow
+group03             ok  ok  wow wow wow nef
 group04             ok  ok  ok  ok  wow ok
-group05             ok  ok  ok  ok  ok
+group05             ok  ok  ok  ok  ok  wow
 group06             ok  ok  ok  wow ok  ++ (27.4)
 group08             ok  ok  ok  ok  wow nef
 group09             ok  ok  wow ok  wow ++ (27.4)
@@ -24,15 +24,16 @@ group11             ok  ok  ok  ok  wow
 group12             ok  ok  wow ok  wow ++ (27.4)
 group13             ok  ok  ok  ok  wow
 group14             ok  ok  ok  ok  ++  ++ (27.4)
-group15             ok  ok  ok  ok  ok
+group15             ok  ok  ok  ok  ok  nef
 group16             ok  ok  ok  ok  ok
 group17             ok  ok  ok  ok  nef ++ (27.4)
-group18             ok  ok  ok  ok  ok
+group18             ok  ok  ok  ok  ok  nef
 group19             ok  ok  ok  ok  nef --
 group20             ok  ok  wow ok  wow ++ (22.4)
 group22             ok  ok  ok  ok  ++ (25.4)
 group23             ok  ok  ok  wow ok --------------------------
-group24             ok  ok  ok  ok  ok
+group24             ok  ok  ok  ok  ok  ++ (27.4)
+group25             ok  nef ok  ++ (26.4)
 group26             ok  nef ok  ok  --
 group30             ok  nef ++  ++ (26.4)
  
