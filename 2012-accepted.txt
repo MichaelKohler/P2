@@ -17,7 +17,7 @@ group03             ok  ok  wow wow wow nef
 group04             ok  ok  ok  ok  wow ok
 group05             ok  ok  ok  ok  ok  wow
 group06             ok  ok  ok  wow ok  ++ (27.4)
-group08             ok  ok  ok  ok  wow nef
+group08             ok  ok  ok  ok  wow ++ (4.5)
 group09             ok  ok  wow ok  wow ++ (27.4)
 group10             ok  ok  ok  --  ok
 group11             ok  ok  ok  ok  wow
