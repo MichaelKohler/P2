@@ -4,14 +4,18 @@ import ch.unibe.jexample.JExample;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.google.inject.Provider;
+
 @RunWith(JExample.class)
 public class CompassTest {
 
     private Compass compass;
+    Provider<Compass> compassProvider;
 
     @Test
     public Compass initCompass() {
-        compass = new Compass();
+    	this.compassProvider = new CompassProvider();
+        compass = this.compassProvider.get();
         return compass;
     }
 

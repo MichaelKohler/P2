@@ -1,15 +1,17 @@
+import com.google.inject.Provider;
+
 /**
  * The |Environment| card decides in which direction the amoebes
  * drift in the round and how thick the ozon layer is. It is put on top
  * of the compass at phase 2 of every round.
  *
  */
-public class EnvironmentCard implements IEnvironmentCard {
+public final class EnvironmentCard implements IEnvironmentCard {
 
-	IDie die = new Die();
-
-    public EnvironmentCard(IDie die) {
-        this.die = die;
+	private final Provider<IDie> dieProvider;
+	
+    public EnvironmentCard(Provider<IDie> dieProvider) {
+    	this.dieProvider = dieProvider;
         Compass.direction = calculateNewDirection();
         Compass.ozonLayer = calculateOzonLayer();
     }
@@ -18,7 +20,7 @@ public class EnvironmentCard implements IEnvironmentCard {
      * calculate new direction
      */
     public Compass.Direction calculateNewDirection() {
-        int directionNumber = this.die.roll(1, 4);
+        int directionNumber = dieProvider.get().roll(1, 4);
         switch (directionNumber) {
             case 1:
                 return Compass.Direction.NORTH;
@@ -37,6 +39,12 @@ public class EnvironmentCard implements IEnvironmentCard {
      * calculate ozon layer thickness
      */
     public int calculateOzonLayer() {
-        return this.die.roll(0, 10);
+        return this.dieProvider.get().roll(0, 10);
+    }
+    
+    @Override
+    public String toString(){
+    	//TODO
+		return "[NOTHING YET.]";
     }
 }

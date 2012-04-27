@@ -1,13 +1,18 @@
+import com.google.inject.Provider;
+
 /**
  * The |Board| is the playground. It holds all equipment required by the game.
  * Further it is responsible to create the whole playground.
  */
-public class Board {
-    public static Square[][] board;
-    private Player[] players;
+public final class Board {
+    final static Square[][] board = new Square[5][5];
+    private final Player[] players;
+    private final Provider<Die> dieProvider;
+    private final Provider<Compass> compassProvider;
 
-    public Board(Player[] players) {
-        board = new Square[5][5];
+    public Board(Provider<Compass> compassProvider, Provider<Die> dieProvider, Player[] players) {
+    	this.compassProvider = compassProvider;
+    	this.dieProvider = dieProvider;
         this.players = players;
         initBoard();
     }
@@ -36,7 +41,7 @@ public class Board {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 int[] position = { i, j};
-                board[i][j] = new Square(position);
+                board[i][j] = SquareFactory.get(position);
             }
         }
     }
@@ -51,7 +56,7 @@ public class Board {
      * sets the amoebes to random squares, two for each player
      */
     private void setAmoebesToSquares() {
-        Die die = new Die();
+        Die die = dieProvider.get();
         for (int i = 0; i < this.players.length; i++) {
             Game.Color color = this.players[i].getColor();
             boolean statusOK = false;
@@ -61,7 +66,7 @@ public class Board {
                 randomCol = die.roll(1, 5) - 1;
                 statusOK = Board.board[randomRow][randomCol].getAmoebesList().size() == 0;
             } while (!statusOK);
-            Amoebe amo1 = new Amoebe(color);
+            Amoebe amo1 = AmoebeFactory.get(this.compassProvider, color);
             board[randomRow][randomCol].enterSquare(amo1);
             
             statusOK = false;
@@ -70,7 +75,7 @@ public class Board {
                 randomCol = die.roll(1, 5) - 1;
                 statusOK = Board.board[randomRow][randomCol].getAmoebesList().size() == 0;
             } while (!statusOK);
-            Amoebe amo2 = new Amoebe(color);
+            Amoebe amo2 = AmoebeFactory.get(this.compassProvider, color);
             board[randomRow][randomCol].enterSquare(amo2);
         }
     }
@@ -81,7 +86,7 @@ public class Board {
      * @param  this.players
      */
     public Player[] getPlayers() {
-        return this.players;
+        return this.players.clone();
     }
     
     /**
@@ -97,9 +102,10 @@ public class Board {
     }
     
     /**
-     * draw the board in ASCII
+     * get an ASCII string representation
      */
-    public void draw(){
+    @Override
+    public String toString(){
     	StringBuilder str = new StringBuilder();
     	str.append("\n");
 
@@ -125,6 +131,6 @@ public class Board {
 
 	    	str.append("\n\n");
     	}
-    	System.out.println(str.toString());
+    	return str.toString();
     }
 }

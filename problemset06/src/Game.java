@@ -1,10 +1,14 @@
+import java.util.Collections;
+import java.util.List;
 import java.util.ArrayList;
+
+import com.google.inject.Provider;
 
 /**
  * The Game is the container for the whole application. It creates the board
  * and holds the round counter.
  */
-public class Game {
+public final class Game {
 
     private final int DARKZONEBEGINNING = 20;
 
@@ -22,12 +26,18 @@ public class Game {
         }
     }
     
-    private Board board;
+    private final Board board;
     private int currentRound;
+    private final Provider<Die> dieProvider;
+    private final Provider<IDie> iDieProvider;
+	private final Provider<Compass> compassProvider;
     
-    public Game(Player[] players) {
-        this.board = new Board(players);
-        this.board.draw();
+    public Game(Provider<Compass> compassProvider, Provider<IDie> iDieProvider, Provider<Die> dieProvider, Player[] players) {
+    	this.compassProvider = compassProvider;
+    	this.dieProvider = dieProvider;
+    	this.iDieProvider = iDieProvider;
+        this.board = BoardFactory.get(compassProvider, dieProvider, players);
+        System.out.println(this.board.toString());
         this.currentRound = 1;
     }
 
@@ -55,7 +65,8 @@ public class Game {
                 }
             }
         }
-        
+        //TODO
+        //this is not yet immutable
         return winner;
     }
 
@@ -81,7 +92,7 @@ public class Game {
      * @return this.board.getPlayers()
      */
     public Player[] getPlayers() {
-        return this.board.getPlayers();
+        return this.board.getPlayers().clone();
     }
     
     /**
@@ -93,7 +104,7 @@ public class Game {
         boolean useTentacles = currentPlayer.hasGene("tentacles");
         for (int i = 0; i < Board.getBoardDimensions()[0]; i++) {
             for (int j = 0; j < Board.getBoardDimensions()[1]; j++) {
-                ArrayList<Amoebe> amoebes = Board.board[i][j].getAmoebesForColor(currentPlayer.getColor());
+                List<Amoebe> amoebes = Collections.unmodifiableList(Board.board[i][j].getAmoebesForColor(currentPlayer.getColor()));
                 for (int a = 0; a < amoebes.size(); a++) {
                     amoebes.get(a).drift(direction, useTentacles);
                 }
@@ -113,19 +124,19 @@ public class Game {
         switch (numberOfGene) {
             case 1: 
                 if (player.getBp() >= 5)
-                    gene = new Gene("streamlining", 5, 4);
+                    gene = GeneFactory.get("streamlining", 5, 4);
                 break;
             case 2:
                 if (player.getBp() >= 5)
-                    gene = new Gene("tentacle", 5, 4);
+                    gene = GeneFactory.get("tentacle", 5, 4);
                 break;
             case 3:
                 if (player.getBp() >= 5)
-                    gene = new Gene("lifeexpectancy", 5, 5);
+                    gene = GeneFactory.get("lifeexpectancy", 5, 5);
                 break;
             case 4:
                 if (player.getBp() >= 6)
-                    gene = new Gene("frugality", 6, 5);
+                    gene = GeneFactory.get("frugality", 6, 5);
                 break;
            }
         if (gene == null)
@@ -139,10 +150,10 @@ public class Game {
      */
     public void phase1(Player player) {
         // drift
-        ArrayList<Amoebe> allAmoebesForPlayer = new ArrayList<Amoebe>();
+        List<Amoebe> allAmoebesForPlayer = new ArrayList<Amoebe>();
         for (int i = 0; i < Board.getBoardDimensions()[0]; i++) {
             for (int j = 0; j < Board.getBoardDimensions()[1]; j++) {
-                ArrayList<Amoebe> amoebes = Board.board[i][j].getAmoebesForColor(player.getColor());
+                List<Amoebe> amoebes = Board.board[i][j].getAmoebesForColor(player.getColor());
                 if (amoebes != null)
                     allAmoebesForPlayer.addAll(amoebes);
             }
@@ -157,7 +168,7 @@ public class Game {
             amoebe.eat(useFrugality); // this includes excrements
         }
         
-        this.board.draw();
+        System.out.println(this.board.toString());
     }
     
     /**
@@ -165,7 +176,7 @@ public class Game {
      */
     public void phase2() {
         // new Environment card
-        EnvironmentCard card = new EnvironmentCard(new Die());
+        EnvironmentCard card = EnvironmentCardFactory.get(this.iDieProvider);
         System.out.println("New EnvironmentCard!");
     }
     
@@ -173,7 +184,7 @@ public class Game {
      * does everything which needs to be done in phase 3.
      */
     public void phase3() {
-        Die die = new Die();
+        Die die = this.dieProvider.get();
         for(Player player : getPlayers()){
             buyGene(die.roll(1, 4), player);
         }
@@ -201,11 +212,11 @@ public class Game {
      */
     public void phase5() {
         // deaths
-        ArrayList<Amoebe> toBeKilled = new ArrayList<Amoebe>();
+        List<Amoebe> toBeKilled = new ArrayList<Amoebe>();
         
         for (int i = 0; i < Board.getBoardDimensions()[0]; i++) {
             for (int j = 0; j < Board.getBoardDimensions()[1]; j++) {
-                ArrayList<Amoebe> allOfTheSquare = Board.board[i][j].getAmoebesList();
+                List<Amoebe> allOfTheSquare = Collections.unmodifiableList(Board.board[i][j].getAmoebesList());
                 for (int k = 0; k < allOfTheSquare.size(); k++) {
                     for (int l = 0; l < this.getPlayers().length; l++) {
                         if (this.getPlayers()[l].getColor() == allOfTheSquare.get(k).getColor()) {
@@ -224,7 +235,7 @@ public class Game {
             toBeKilled.get(i).getSquare().setFoodstuffCubes();
         }
         
-        this.board.draw();
+        System.out.println(this.board.toString());
     }
     
     /**
@@ -238,7 +249,7 @@ public class Game {
             int amoebaScore = 0;
             for(int i=0; i<Board.getBoardDimensions()[0]; i++){
                 for(int j=0; j<Board.getBoardDimensions()[1]; j++){
-                    ArrayList<Amoebe> amoebes = Board.board[i][j].getAmoebesForColor(player.getColor());
+                    List<Amoebe> amoebes = Board.board[i][j].getAmoebesForColor(player.getColor());
                     amoebaScore += amoebes.size();
                 }
             }
@@ -263,7 +274,11 @@ public class Game {
             System.out.print(player.getScore() + " points!\n");
         }
         
-        this.board.draw();
+        System.out.println(this.board.toString());
         return this.checkWinner();
+    }
+    
+    public String toString(){
+    	return "[ board="+this.board+", current round="+this.currentRound+"]";
     }
 }

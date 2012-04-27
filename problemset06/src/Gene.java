@@ -5,11 +5,11 @@
  * of a gene is implemented within the whole code.
  *
  */
-public class Gene {
+public final class Gene {
 	
-	private String gene;
-	private int price;
-	private int mutationPoints;
+	private final String gene;
+	private final int price;
+	private final int mutationPoints;
 	
 	public Gene(String gene, int price, int mutationPoints){
 		this.gene = gene;
@@ -44,5 +44,14 @@ public class Gene {
 		return price;
 	}
 	
+	/**
+     * returns a string representation of the object
+     * 
+     * @return String
+     */
+	@Override
+    public String toString(){
+		return "[ type="+this.gene+", price="+this.price+", mutation points="+this.mutationPoints+"]";
+    }
 	
 }

@@ -1,19 +1,27 @@
+import java.util.Collections;
+import java.util.List;
 import java.util.ArrayList;
+
+import com.google.inject.Provider;
 
 /**
  * A |Player| is initialized for every player who wants to play. For this
  * Problemset we assume it is always 3. A player has a name, a color and
  * a score.
  */
-public class Player {
+public final class Player {
 	
-	private String name;
+	private final String name;
 	private Game.Color color;
 	private int score;
-	private ArrayList<Gene> genes = new ArrayList<Gene>();
+	private List<Gene> genes = new ArrayList<Gene>();
 	private int bp;
+	private final Provider<Die> dieProvider;
+	private final Provider<Compass> compassProvider;
 	
-	public Player(String playerName) {
+	public Player(Provider<Compass> compassProvider, Provider<Die> dieProvider, String playerName) {
+		this.compassProvider = compassProvider;
+		this.dieProvider = dieProvider;
 		this.name = playerName;
 		this.color = null;
 		this.score = 0;
@@ -61,8 +69,8 @@ public class Player {
 	/**
 	 * return the genes
 	 */
-	public ArrayList<Gene> getGenes(){
-		return this.genes;
+	public List<Gene> getGenes(){
+		return Collections.unmodifiableList(this.genes);
 	}
 	
 	/**
@@ -118,9 +126,9 @@ public class Player {
 	 * split the amoeba. This happens in phase 4.
 	 */
 	public void splitAmoeba(){
-	    Amoebe TMPamoebe = new Amoebe(this.color);
+	    Amoebe TMPamoebe = AmoebeFactory.get(this.compassProvider, this.color);
 	    Amoebe newAmoebe = TMPamoebe.divide();
-	    Die die = new Die();
+	    Die die = this.dieProvider.get();
 	    int[] position = { -1, -1 };
 	    do {
 	        position[0] = die.roll(1, 5) - 1;
@@ -134,4 +142,13 @@ public class Player {
 	    this.setBp(this.getBp() - 6);
 	}
 
+	/**
+     * returns a string representation of the object
+     * 
+     * @return String
+     */
+	@Override
+    public String toString(){
+		return "[ name="+this.name+", color="+this.color+", score="+this.score+", genes="+this.genes+", bp="+this.bp+"]";
+    }
 }

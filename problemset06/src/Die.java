@@ -1,8 +1,8 @@
 /**
  * The |Die| class is responsible for returning a random number between 1 and 6.
  */
-public class Die implements IDie {
-    static final int FACES = 6;
+public final class Die implements IDie {
+	private static final int FACES = 6;
     
     /**
      * Returns the number rolled which has to be in between 1 and 6.
@@ -29,5 +29,22 @@ public class Die implements IDie {
         long fraction = (long) (range * Math.random());
         int randomNumber = (int) (fraction + low);
         return randomNumber;
+    }
+    
+    /**
+     * Returns the number of faces
+     */
+    public static int getFaces(){
+    	return FACES;
+    }
+    
+    /**
+     * returns a string representation of the object
+     * 
+     * @return String
+     */
+    @Override
+    public String toString(){
+		return "[ faces="+this.FACES+"]";
     }
 }

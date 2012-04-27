@@ -4,7 +4,7 @@
  * direction as a traditional compass (i.e. north, south, west, east).
  *
  */
-public class Compass {
+public final class Compass {
 
     public enum Direction { 
         NORTH("north"),
@@ -27,5 +27,15 @@ public class Compass {
     public Compass() {
         direction = Direction.SOUTH;
         ozonLayer = 0;
+    }
+    
+    /**
+     * returns a string representation of the object
+     * 
+     * @return String
+     */
+    @Override
+    public String toString(){
+		return "[direction="+this.direction+", ozon layer="+this.ozonLayer+"]";
     }
 }

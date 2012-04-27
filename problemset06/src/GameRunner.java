@@ -1,7 +1,10 @@
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Arrays;
 
 import org.junit.Test;
+
+import com.google.inject.Provider;
+
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -13,7 +16,9 @@ public class GameRunner {
 
     private Game game;
     // TODO: dice rolling
-    ArrayList<Player> playersQueue;
+    List<Player> playersQueue;
+    private final Provider<Die> dieProvider = new DieProvider();
+    private final Provider<Compass> compassProvider = new CompassProvider();
 
     @Test
     public void shouldRunRandomGame() {
@@ -23,17 +28,17 @@ public class GameRunner {
     }
 
     public void initGame() {
-        Player player1 = new Player("Player1");
+        Player player1 = PlayerFactory.get(compassProvider, dieProvider, "Player1");
         player1.chooseColor(Game.Color.RED);
-        Player player2 = new Player("Player2");
+        Player player2 = PlayerFactory.get(compassProvider, dieProvider, "Player2");
         player2.chooseColor(Game.Color.BLUE);
-        Player player3 = new Player("Player3");
+        Player player3 = PlayerFactory.get(compassProvider, dieProvider, "Player3");
         player3.chooseColor(Game.Color.GREEN);
         Player[] players = { player1, player2, player3 };
-        playersQueue = new ArrayList(Arrays.asList(players));
+        playersQueue = Arrays.asList(players);
         assertTrue(playersQueue.size() == 3);
         
-        game = new Game(players);
+        game = GameFactory.get(players);
         System.out.println("Game ready..");
     }
     
@@ -63,7 +68,7 @@ public class GameRunner {
             System.out.println("Round " + game.getCurrentRound() + " has started!");
             for (int i = 0; i < playersQueue.size(); i++) {
                 System.out.println("It's " + playersQueue.get(i).getName() + "'s turn!");
-                Die decisions = new Die();
+                Die decisions = this.dieProvider.get();
                 int number = decisions.roll(1, 2);
                 if (number == 1) {
                     game.phase1(playersQueue.get(i));

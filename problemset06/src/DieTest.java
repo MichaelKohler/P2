@@ -14,7 +14,7 @@ public class DieTest {
 		IDie die = new Die();
 		for (int i = 1;i<=MAX;i++) {
 			int result = die.roll();
-			assertTrue(result >= 1 && result <= Die.FACES);
+			assertTrue(result >= 1 && result <= Die.getFaces());
 		}
 	}
 
@@ -25,7 +25,7 @@ public class DieTest {
 
 	@Test
 	public void testMaxReached() {
-		assertTrue(reached(Die.FACES));
+		assertTrue(reached(Die.getFaces()));
 	}
 	
 	private boolean reached(int value) {

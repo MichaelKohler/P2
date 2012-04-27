@@ -1,25 +1,30 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import com.google.inject.Provider;
 
 /**
  * An |Amoebe| is a playing figure. The player needs to feed it with |FoodstuffCube|s.
  * An amoebe has the same color as the player it's belonging to.
  * 
  */
-public class Amoebe {
+public final class Amoebe {
 
-    private Game.Color color;
+    private final Game.Color color;
     private Square square;
     private int damagePoints;
-    private ArrayList<FoodstuffCube> eatenCubes;
+    private ArrayList<FoodstuffCube> eatenCubes = new ArrayList<FoodstuffCube>();
+    private final Provider<Compass> compassProvider;
     
-    public Amoebe(Game.Color color) {
+    public Amoebe(Provider<Compass> compassProvider, Game.Color color) {
+    	this.compassProvider = compassProvider;
         this.color = color;
         this.square = null;
         this.damagePoints = 0;
-        eatenCubes = new ArrayList<FoodstuffCube>();
     }
-    
     /**
+    
      * returns the color of the amoebe
      * 
      * @return this.color
@@ -43,7 +48,7 @@ public class Amoebe {
      * @return this.square
      */
     public Square getSquare() {
-        return this.square;
+        return new Square(this.square.getPosition());
     }
     
     /**
@@ -68,8 +73,8 @@ public class Amoebe {
      * @param useFrugality
      */
     public void eat(boolean useFrugality) {
-        ArrayList<FoodstuffCube> cubes = this.square.getFoodcubes();
-        ArrayList<FoodstuffCube> removeCubeList = new ArrayList<FoodstuffCube>();
+        List<FoodstuffCube> cubes = Collections.unmodifiableList(this.square.getFoodcubes());
+        List<FoodstuffCube> removeCubeList = new ArrayList<FoodstuffCube>();
         int eatenCubes = 0;
         Game.Color firstColorEaten = null;
         int cubesToEat = useFrugality ? 2 : 3;
@@ -108,7 +113,7 @@ public class Amoebe {
      */
     public void excrement() {
         for (int i = 0; i < 2; i++) {
-            FoodstuffCube cube = new FoodstuffCube(this.color);
+            FoodstuffCube cube = FoodstuffCubeFactory.get(this.color);
             this.square.placeFoodstuffCube(cube);
         }
     }
@@ -117,7 +122,7 @@ public class Amoebe {
      * divide the amoebe
      */
     public Amoebe divide() {
-        return new Amoebe(this.color);
+        return AmoebeFactory.get(this.compassProvider, this.color);
     }
     
     /**
@@ -141,7 +146,7 @@ public class Amoebe {
         boolean notEast = amoebePosX == 4;
         boolean notWest = amoebePosX == 0;
         
-        Compass compass = new Compass();
+        Compass compass = this.compassProvider.get();
         Compass.Direction oldDirection = Compass.direction;
         if (direction != null) {
             Compass.direction = direction;
@@ -202,5 +207,15 @@ public class Amoebe {
         
         // restore old compass direction
         Compass.direction = oldDirection;
+    }
+    
+    /**
+     * returns a string representation of the object
+     * 
+     * @return String
+     */
+    @Override
+    public String toString(){
+		return "[color="+this.color+", square="+this.square+", damage points="+this.damagePoints+", eaten cubes="+this.eatenCubes+"]";
     }
 }

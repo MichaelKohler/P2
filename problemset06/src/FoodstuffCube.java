@@ -4,9 +4,9 @@
  * The cubes have different colors (each per player). These colors are
  * defined in Game.Color.
  */
-public class FoodstuffCube {
+public final class FoodstuffCube {
 
-    private Game.Color color;
+    private final Game.Color color;
 
     public FoodstuffCube(Game.Color color) {
          this.color = color;
@@ -20,5 +20,15 @@ public class FoodstuffCube {
     public Game.Color getColor() {
         assert this.color != null;
         return this.color;
+    }
+    
+    /**
+     * returns a string representation of the object
+     * 
+     * @return String
+     */
+    @Override
+    public String toString(){
+		return "[ color="+this.color+"]";
     }
 }

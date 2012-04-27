@@ -1,14 +1,16 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * The |Square| is a field on the board. It can hold |FoodstuffCubes| and |Amoebe|s.
  * There is no restriction in terms of the amount to be placed on a |Square|.
  */
-public class Square {
+public final class Square {
 
-	private ArrayList<FoodstuffCube> foodstuffCubes = new ArrayList<FoodstuffCube>();
-	private ArrayList<Amoebe> amoebes = new ArrayList<Amoebe>();
-	private int[] position;
+	private List<FoodstuffCube> foodstuffCubes = new ArrayList<FoodstuffCube>();
+	private List<Amoebe> amoebes = new ArrayList<Amoebe>();
+	private final int[] position;
 
     public Square(int[] position) {
     	this.position = position;
@@ -20,15 +22,15 @@ public class Square {
      */
     public void setFoodstuffCubes() {
         for (int i = 0; i < 2; i++) {
-            FoodstuffCube cube = new FoodstuffCube(Game.Color.BLUE);
+            FoodstuffCube cube = FoodstuffCubeFactory.get(Game.Color.BLUE);
             this.foodstuffCubes.add(cube);
         }
         for (int i = 0; i < 2; i++) {
-            FoodstuffCube cube = new FoodstuffCube(Game.Color.GREEN);
+            FoodstuffCube cube = FoodstuffCubeFactory.get(Game.Color.GREEN);
             this.foodstuffCubes.add(cube);
         }
         for (int i = 0; i < 2; i++) {
-            FoodstuffCube cube = new FoodstuffCube(Game.Color.RED);
+            FoodstuffCube cube = FoodstuffCubeFactory.get(Game.Color.RED);
             this.foodstuffCubes.add(cube);
         }
     }
@@ -39,7 +41,7 @@ public class Square {
      * @return this.position
      */
     public int[] getPosition() {
-        return this.position;
+        return this.position.clone();
     }
     
     /**
@@ -80,13 +82,13 @@ public class Square {
     	return "r: "+redCounter+", b: "+blueCounter+", g: "+greenCounter;
     }
     
-    public ArrayList<Amoebe> getAmoebesForColor(Game.Color color){
-    	ArrayList<Amoebe> amoebesList = new ArrayList<Amoebe>();
+    public List<Amoebe> getAmoebesForColor(Game.Color color){
+    	List<Amoebe> amoebesList = new ArrayList<Amoebe>();
     	for(int i=0; i<this.amoebes.size(); i++){
     		if(this.amoebes.get(i).getColor() == color)
     			amoebesList.add(this.amoebes.get(i));
     	}
-    	return amoebesList;
+    	return Collections.unmodifiableList(amoebesList);
     }
     
     /**
@@ -118,19 +120,19 @@ public class Square {
     /**
      * returns the foodcubes placed on this square
      * 
-     * @return ArrayList   foodcubes
+     * @return List   foodcubes
      */
-    public ArrayList<FoodstuffCube> getFoodcubes(){
-    	return this.foodstuffCubes;
+    public List<FoodstuffCube> getFoodcubes(){
+    	return Collections.unmodifiableList(this.foodstuffCubes);
     }
     
     /**
      * returns the amoebes placed on this square
      * 
-     * @return ArrayList   amoebes
+     * @return List   amoebes
      */
-    public ArrayList<Amoebe> getAmoebesList(){
-    	return this.amoebes;
+    public List<Amoebe> getAmoebesList(){
+    	return Collections.unmodifiableList(this.amoebes);
     }
     
     /**
@@ -156,5 +158,15 @@ public class Square {
      */
     public void removeFoodstuffCube(FoodstuffCube cube) {
         this.foodstuffCubes.remove(cube);
+    }
+    
+    /**
+     * returns a string representation of the object
+     * 
+     * @return String
+     */
+    @Override
+    public String toString(){
+    	return "[ amoebes="+this.amoebes+", foodstuff cubes="+this.foodstuffCubes+", position="+this.position+"]";
     }
 }
