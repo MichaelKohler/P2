@@ -20,7 +20,7 @@ group06             ok  ok  ok  wow ok  ++ (27.4)
 group08             ok  ok  ok  ok  wow ++ (4.5)
 group09             ok  ok  wow ok  wow ++ (27.4)
 group10             ok  ok  ok  --  ok
-group11             ok  ok  ok  ok  wow
+group11             ok  ok  ok  ok  wow wow
 group12             ok  ok  wow ok  wow ++ (27.4)
 group13             ok  ok  ok  ok  wow
 group14             ok  ok  ok  ok  ++  ++ (27.4)
