@@ -35,7 +35,8 @@ public class GameRunner {
         Player player3 = PlayerFactory.get(compassProvider, dieProvider, "Player3");
         player3.chooseColor(Game.Color.GREEN);
         Player[] players = { player1, player2, player3 };
-        playersQueue = Arrays.asList(players);
+        playersQueue = Arrays.asList(players); // AK this also works as
+//        playersQueue = Arrays.asList(player1, player2, player3);
         assertTrue(playersQueue.size() == 3);
         
         game = GameFactory.get(players);
@@ -90,7 +91,7 @@ public class GameRunner {
                             direction = Compass.Direction.EAST;
                             break;
                         case 5:
-                            continue;
+                            continue; // AK shouldn't I be able to move my amoeba anyway?
                         case 6:
                             int randomDirection = decisions.roll(1, 4);
                             direction = getDirectionForDecision(randomDirection);

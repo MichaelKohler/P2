@@ -7,7 +7,7 @@ import org.junit.Test;
  *
  */
 public class DieTest {
-	private static final int MAX = 20;
+	private static final int MAX = 2000; // AK I know Oscar used this test first, but I think, you should use a more reasonable MAX value, so to assure, that the probability of a false positive (an error where there is none) is sufficiently small. e.g. 2000
 	
 	@Test
 	public void testInRange() {

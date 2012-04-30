@@ -37,7 +37,7 @@ public final class Player {
 		this.color = color;
 		System.out.println("Player " + this.name + " has been fully initialized.. Color: " +
                 this.color.toString() + ".. Score: " + this.score + "\n");
-	}
+	} // AK if you're interested to solve this problem without manually adjusting the player -- I injected a collection of rules in my screencast (https://vimeo.com/40868981) 
 	
 	/**
 	 * returns the name of the player

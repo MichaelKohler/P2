@@ -17,8 +17,33 @@ public final class Compass {
             this.rep = s;
         }
         public String toString() {
-            return this.rep;
+            return this.rep; // AK last year, I learned, that you can do the following:
         }
+        
+        
+//        NORTH() {
+//			public String toString() {
+//				return "north";
+//			}
+//		},
+//        SOUTH() {
+//			public String toString() {
+//				return "south";
+//			}
+//		},
+//        WEST() {
+//			public String toString() {
+//				return "west";
+//			}
+//		},
+//        EAST() {
+//			public String toString() {
+//				return "east";
+//			}
+//		};
+//        public abstract String toString();
+        
+// AK I just thought you should know, eventhough the practical use is quite limited (though not too limited, you can replace `switch` by method dispatch)
     }
 
     public static Direction direction;

@@ -73,12 +73,13 @@ public final class Amoebe {
      * @param useFrugality
      */
     public void eat(boolean useFrugality) {
-        List<FoodstuffCube> cubes = Collections.unmodifiableList(this.square.getFoodcubes());
+        List<FoodstuffCube> cubes = Collections.unmodifiableList(this.square.getFoodcubes()); // AK it's actually safer to do this on the other end
         List<FoodstuffCube> removeCubeList = new ArrayList<FoodstuffCube>();
         int eatenCubes = 0;
         Game.Color firstColorEaten = null;
         int cubesToEat = useFrugality ? 2 : 3;
-        for (int i = 0; i < cubes.size(); i++) {
+        for (int i = 0; i < cubes.size(); i++) { // AK prefer the foreach loops to the normal `for` loops, because it shows the intend much better, e.g.
+//        for (FoodstuffCube cube : cubes ) {
             if (cubes.get(i).getColor() != this.color && eatenCubes <= cubesToEat) {
                 if (firstColorEaten == null) {
                     removeCubeList.add(cubes.get(i));
@@ -142,11 +143,11 @@ public final class Amoebe {
         int amoebePosX = this.square.getPosition()[0];
         int amoebePosY = this.square.getPosition()[1];
         boolean notNorth = amoebePosY == 0;
-        boolean notSouth = amoebePosY == 4;
-        boolean notEast = amoebePosX == 4;
+        boolean notSouth = amoebePosY == 4; // AK don't use unnamed constants other than 1, 0 and possibly -1
+        boolean notEast = amoebePosX == 4;  
         boolean notWest = amoebePosX == 0;
         
-        Compass compass = this.compassProvider.get();
+        Compass compass = this.compassProvider.get(); // AK You don't actually use this object, instead prefering the static attribute
         Compass.Direction oldDirection = Compass.direction;
         if (direction != null) {
             Compass.direction = direction;
@@ -162,11 +163,11 @@ public final class Amoebe {
             }
         }
         
-        switch (Compass.direction) {
-        case NORTH:
-            if (!notNorth && !(amoebePosX == 2 && amoebePosY - 1 == 2)) {
-                this.square.removeAmoebe(this);
-                Board.board[amoebePosX][amoebePosY - 1].enterSquare(this);
+        switch (Compass.direction) { // AK switch statements often lead to lots of dublicated code
+        case NORTH:                  // as for example here, can you come up with a way, that only
+            if (!notNorth && !(amoebePosX == 2 && amoebePosY - 1 == 2)) {  // changes the parts of
+                this.square.removeAmoebe(this);   // the code that are different (and possibly use 
+                Board.board[amoebePosX][amoebePosY - 1].enterSquare(this);        // ifs instead?)
                 if (useTentacles && carryCubes.length > 0) {
                     Board.board[amoebePosX][amoebePosY - 1].placeFoodstuffCube(carryCubes[0]);
                     Board.board[amoebePosX][amoebePosY - 1].placeFoodstuffCube(carryCubes[1]);
@@ -206,7 +207,7 @@ public final class Amoebe {
         }
         
         // restore old compass direction
-        Compass.direction = oldDirection;
+        Compass.direction = oldDirection; // AK what is this doing herer?
     }
     
     /**
