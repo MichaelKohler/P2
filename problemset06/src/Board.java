@@ -42,10 +42,18 @@ public final class Board {
             for (int j = 0; j < board[i].length; j++) {
                 int[] position = { i, j};
                 board[i][j] = SquareFactory.get(position);
+                /*
+                 * While I admit, that this static factory method does get the
+                 * `new` out of view, it does not add much flexibility to the
+                 * application (but it does add complexity, a dangerous combination).
+                 * I think, you actually mean to inject the factory as an instance,
+                 * so that you can rebind the factory if needed.
+                 */
             }
         }
     }
     
+    // AK You seem to a) be missing a method or b) have a comment too many
     /**
      * ask square to add amoebe
      * 
@@ -59,18 +67,18 @@ public final class Board {
         Die die = dieProvider.get();
         for (int i = 0; i < this.players.length; i++) {
             Game.Color color = this.players[i].getColor();
-            boolean statusOK = false;
+            boolean statusOK = false; // AK this sounds a bit over-dramatic, "freeSquare" seems more appropriate
             int randomRow, randomCol;
             do {
-                randomRow = die.roll(1, 5) - 1;
-                randomCol = die.roll(1, 5) - 1;
+                randomRow = die.roll(1, 5) - 1; // AK could you maybe implement a `choose(List<Square> from) : Square` function that
+                randomCol = die.roll(1, 5) - 1; // guarantees that even if I'm unlucky (or have badly mocked), always halts?
                 statusOK = Board.board[randomRow][randomCol].getAmoebesList().size() == 0;
             } while (!statusOK);
             Amoebe amo1 = AmoebeFactory.get(this.compassProvider, color);
             board[randomRow][randomCol].enterSquare(amo1);
             
-            statusOK = false;
-            do {
+            statusOK = false; // AK don't repeat yourselves, you could have done the same with a simple for-loop here. 
+            do {              // remember that more code is more place for error
                 randomRow = die.roll(1, 5) - 1;
                 randomCol = die.roll(1, 5) - 1;
                 statusOK = Board.board[randomRow][randomCol].getAmoebesList().size() == 0;
@@ -105,7 +113,7 @@ public final class Board {
      * get an ASCII string representation
      */
     @Override
-    public String toString(){
+    public String toString(){ // AK this might have better been place in a separate class, so that you can easily extend/switch this representation
     	StringBuilder str = new StringBuilder();
     	str.append("\n");
 

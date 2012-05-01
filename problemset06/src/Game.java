@@ -8,9 +8,25 @@ import com.google.inject.Provider;
  * The Game is the container for the whole application. It creates the board
  * and holds the round counter.
  */
+/*
+ * AK You did a great job implementing the ursuppe game and are seriously working
+ * on the Guice ankle. While at places, you have too deeply nested code, in general
+ * I have the feeling that you have a good grasp of the ideas of p2. 
+ * 
+ * Although I have to admit, I think you might be a bit overly fold of providers and
+ * factories, but need to rethink what you're trying to do: separating the creation
+ * from the usage of objects, so that you can dispatch on them. But create some (2?)
+ * Guice modules for the game and see where it's leading.
+ * 
+ * BTW I admire your testing practice: nearly 90% test coverage!
+ * 
+ * So of course, your ursuppe has been...
+ * 
+ * ACCEPTED
+ */
 public final class Game {
 
-    private final int DARKZONEBEGINNING = 20;
+    private final int DARKZONEBEGINNING = 20; // AK ...now I'm scared!
 
     public enum Color { 
         BLUE("blue"),
@@ -29,7 +45,7 @@ public final class Game {
     private final Board board;
     private int currentRound;
     private final Provider<Die> dieProvider;
-    private final Provider<IDie> iDieProvider;
+    private final Provider<IDie> iDieProvider; // AK isn't this redundant?
 	private final Provider<Compass> compassProvider;
     
     public Game(Provider<Compass> compassProvider, Provider<IDie> iDieProvider, Provider<Die> dieProvider, Player[] players) {
@@ -186,7 +202,7 @@ public final class Game {
     public void phase3() {
         Die die = this.dieProvider.get();
         for(Player player : getPlayers()){
-            buyGene(die.roll(1, 4), player);
+            buyGene(die.roll(1, 4), player); // AK this would be a nice place to decide who handles the user interface -- the Player, the Game or something else entirely -- and move that decision to that class.
         }
     }
     
@@ -215,14 +231,14 @@ public final class Game {
         List<Amoebe> toBeKilled = new ArrayList<Amoebe>();
         
         for (int i = 0; i < Board.getBoardDimensions()[0]; i++) {
-            for (int j = 0; j < Board.getBoardDimensions()[1]; j++) {
+            for (int j = 0; j < Board.getBoardDimensions()[1]; j++) {// AK are you sure about this?
                 List<Amoebe> allOfTheSquare = Collections.unmodifiableList(Board.board[i][j].getAmoebesList());
-                for (int k = 0; k < allOfTheSquare.size(); k++) {
+                for (int k = 0; k < allOfTheSquare.size(); k++) { // AK ... need to go deeper
                     for (int l = 0; l < this.getPlayers().length; l++) {
-                        if (this.getPlayers()[l].getColor() == allOfTheSquare.get(k).getColor()) {
-                            int maxDamagePoints = this.getPlayers()[l].hasGene("lifeexpectancy") ? 3 : 2;
+                        if (this.getPlayers()[l].getColor() == allOfTheSquare.get(k).getColor()) { 
+                            int maxDamagePoints = this.getPlayers()[l].hasGene("lifeexpectancy") ? 3 : 2; 
                             if (allOfTheSquare.get(k).getDamagePoints() >= maxDamagePoints) {
-                                toBeKilled.add(allOfTheSquare.get(k));
+                                toBeKilled.add(allOfTheSquare.get(k)); // AK ... kill-ception? Seriously, you shouldn't need to nest so deep to get all amoebas. You might delegate to the player (for (Player p : players) { corpses.addAll(p.removeKilledAmoebas()); }) or someone else
                             }
                         }
                     }
@@ -255,8 +271,8 @@ public final class Game {
             }
 
             int steps = 0;
-            if (amoebaScore == 3) steps = 1;
-            if (amoebaScore == 4) steps = 2;
+            if (amoebaScore == 3) steps = 1; // AK in general prefer dynamic structures (e.g. a Map<Integer, Integer> amoebaCountToScore) to lengthy 
+            if (amoebaScore == 4) steps = 2; // case distinctions.
             if (amoebaScore == 5) steps = 4;
             if (amoebaScore == 6) steps = 5;
             if (amoebaScore == 7) steps = 6;

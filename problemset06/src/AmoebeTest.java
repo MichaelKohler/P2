@@ -10,7 +10,7 @@ public class AmoebeTest {
     public void amoebesColorShouldBeRed() {
     	this.compassProvider = new CompassProvider();
         Amoebe amoebe = AmoebeFactory.get(this.compassProvider, Game.Color.RED);
-        assertTrue(amoebe.getColor() == Game.Color.RED);
+        assertTrue(amoebe.getColor() == Game.Color.RED); // AK with assertEquals, you'll get much better error messages, when tests fail
     }
     
     @Test
