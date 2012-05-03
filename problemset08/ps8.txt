@@ -1,0 +1,19 @@
+We chose design no. 5, because it leaves most space to the
+board itself, which is where most of the information is present.
+We also tried to reduce redundant information and tried to find
+a way to structure the screen in an intentional way, so it's
+not necessary to provide much information about the UI.
+
+Additionally, if ACME ever wanted to make it a mobile app,
+the most used buttons (bottom right) are in an area where the
+thumbs may reach them easily.
+
+
+****************************************************************
+*    "The best UI is when you can't see the UI."               *
+*                               - Lukas Diener                 *
+*                                                              *
+*    "The best GUI is the one you don’t even think about."     *
+*                               - Random internet quote        *
+*                                                              *
+****************************************************************
