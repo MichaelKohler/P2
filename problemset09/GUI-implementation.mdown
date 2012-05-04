@@ -1,0 +1,15 @@
+# GUI implementation #
+
+Your boss explains that after prototyping comes the time for implementation. Implement your design using Java Swing, so that the Ursuppe game can be played graphically.
+
+**Note**: Your boss seems to be somewhat dim-witted. Really, he doesn't even remember what your design was. You figure that he wouldn't notice if you still displayed the same game board, in ASCII graphics, in a large panel across the screen. Welcome to the business world!
+
+## Modular unit tests ##
+
+The CTO has looked over your code and he noticed that there are unit tests, and he is very pleased. Alas, he looked up the word “unit test” in a dictionary. He notices, that “unit” stands for class here. Thus, he establishes the following rules for your testing:
+
+* All publicly visible classes must have at least one unit test, where “unit test” refers to an entire class of test methods, but at least one.
+* A unit test may only use (and test) the class it is testing, no more. Make sure that in the setup of your unit test, all other dependencies get replaced by mocks. 
+* Tests that test more than one class are called “integration tests”. The CTO demands that all integration tests be separated from the unit tests, and properly marked as integration tests. Create a new annotation to mark them.
+
+**Note**: The CTO is somewhat dimwitted himself. he may overlook a few violations, so long as the principle holds in general
