@@ -30,7 +30,7 @@ group17             ok  ok  ok  ok  nef ++  ++  ok (11.5)
 group18             ok  ok  ok  ok  ok  ok  ++  wow (4.5)
 group19             ok  ok  ok  ok  nef ++  ++  ++ (7.5)
 group20             ok  ok  wow ok  wow wow wow ok
-group24             ok  ok  ok  ok  ok  ok  nef nef
+group24             ok  ok  ok  ok  ok  ok  --  nef
 group26             ok  ok  ok  ok  --  --  --  wow
  
   ok:   accepted.
