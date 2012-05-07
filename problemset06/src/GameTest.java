@@ -6,6 +6,20 @@ import org.junit.runner.RunWith;
 
 import com.google.inject.Provider;
 
+
+/*
+ * AK You did a good job at the code quality tasks, but I think, you didn't quite
+ * get the idea of dependency injection - instead of manually creating instances,
+ * you inject it via Guice (using an injector) and configure that via modules.
+ * 
+ * Please add 2 modules (one for tests, one for the smoke test/real game) for next
+ * week.
+ * 
+ * Shameless self-promotion - A video course how to develop an application with Guice:
+ * 		https://vimeo.com/40868981
+ * 
+ * important hint: Factories should not be static, but should be injected.
+ */
 @RunWith(JExample.class)
 public class GameTest {
 
