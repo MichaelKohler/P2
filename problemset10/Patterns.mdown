@@ -1,0 +1,36 @@
+# Patterns #
+
+While your boss is on holiday, the CTO can hog you all for himself. He
+recently got his hands on a book regarding Design Patterns and is now
+convinced, that every problem in programming there is and ever will be can be
+solved by picking the right pattern.
+
+He's also conviced that you, since you are such able programmers, have already
+(inadvertently) used patterns in your code. *Describe your Ursuppe implementation using the pattern vocabulary.*
+
+But everything good can always be made better! Your CTO also orders you to *put
+at least one more pattern into your ursuppe code*, because patterns are good,
+therefore more patterns are more better (or so he says). Note that the *Singleton* should not be used, since you can use Guice for that.
+
+**Note:** You have access to the Gang of Four book
+[here](http://scgresources.unibe.ch/~scg/Literature/Books/GOF/contfso.htm),
+which defined the pattern vocabulary. However as time moves on, there where
+more commonly used pattern discovered. Wikipedia has an extensive list
+[here][wiki_design_pattern].
+
+[wiki_design_pattern]: https://en.wikipedia.org/wiki/Design_pattern_(computer_science)
+
+## Modular unit tests ##
+
+Note that the CTO's rules for testing still hold:
+
+* All *publicly visible* classes must have at least one unit test, where “unit
+	test” refers to an entire class of test methods, but at least one.
+* A unit test may only use (and test) the class it is testing, no more. Make
+	sure that in the setup of your unit test, 
+  *all other dependencies get replaced by mocks*. 
+* Tests that test more than one class are called “integration tests”. The CTO
+	demands that *all integration tests be separated from the unit tests*, and
+  properly marked as integration tests. Create a new annotation to mark them.
+
+**Note**: The CTO is somewhat dimwitted himself. he may overlook a few violations, so long as the principle holds in general
