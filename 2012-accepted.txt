@@ -22,7 +22,7 @@ group09             ok  ok  wow ok  wow wow wow ok
 group10             ok  ok  ok  --  ok  ok  --  --
 group11             ok  ok  ok  ok  wow wow nef ok
 group12             ok  ok  wow ok  wow wow --  ok
-group13             ok  ok  ok  ok  wow ok  --  wow
+group13             ok  ok  ok  ok  wow ok  ++  wow (4.5)
 group14             ok  ok  ok  ok  ++  ++  ++  ok  (27.4)
 group15             ok  ok  ok  ok  ok  ok  nef wow ++ (16.5§)
 group16             ok  ok  ok  ok  ok  ok  nef wow
