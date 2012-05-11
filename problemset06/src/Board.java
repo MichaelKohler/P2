@@ -1,3 +1,9 @@
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import com.google.inject.Provider;
 
 /**
@@ -9,10 +15,13 @@ public final class Board {
     private final Player[] players;
     private final Provider<Die> dieProvider;
     private final Provider<Compass> compassProvider;
+    private JFrame boardGUIFrame;
+    private JLabel boardLabel;
+    private JLabel stateLabel;
 
     public Board(Provider<Compass> compassProvider, Provider<Die> dieProvider, Player[] players) {
-    	this.compassProvider = compassProvider;
-    	this.dieProvider = dieProvider;
+         this.compassProvider = compassProvider;
+         this.dieProvider = dieProvider;
         this.players = players;
         initBoard();
     }
@@ -29,9 +38,10 @@ public final class Board {
      * initialize the whole board and make it ready for playing
      */
     private void initBoard() {
-    	assert invariant();
+         assert invariant();
         createSquares();
         setAmoebesToSquares();
+        createGUI();
     }
     
     /**
@@ -89,6 +99,32 @@ public final class Board {
     }
     
     /**
+     * Creates the whole GUI. The GUI has a board (ASCII) and displays a Label
+     * which informs the user about the Game state (e.g. whose turn it is).
+     */
+    private void createGUI() {
+        boardGUIFrame = new JFrame();
+        boardGUIFrame.setVisible(true);
+        boardGUIFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        boardGUIFrame.setSize(600, 400);
+        boardGUIFrame.setResizable(true);
+        boardGUIFrame.setTitle("Ursuppe - Problemset09");
+        
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        
+        String boardsStringRep = this.toString();
+        boardLabel = new JLabel(boardsStringRep);
+        panel.add(boardLabel, BorderLayout.CENTER);
+        
+        stateLabel = new JLabel();
+        panel.add(stateLabel, BorderLayout.SOUTH);
+        
+        boardGUIFrame.add(panel);
+        boardGUIFrame.repaint();
+    }
+    
+    /**
      * returns the array of Players which participate in the game
      * 
      * @param  this.players
@@ -103,10 +139,10 @@ public final class Board {
      * @return dim    the dimension of the board
      */
     public static int[] getBoardDimensions() {
-    	int[] dim = new int[2];
-    	dim[0] = board.length;
-    	dim[1] = board[0].length;
-    	return dim;
+         int[] dim = new int[2];
+         dim[0] = board.length;
+         dim[1] = board[0].length;
+         return dim;
     }
     
     /**
@@ -114,31 +150,51 @@ public final class Board {
      */
     @Override
     public String toString(){ // AK this might have better been place in a separate class, so that you can easily extend/switch this representation
-    	StringBuilder str = new StringBuilder();
-    	str.append("\n");
+        StringBuilder str = new StringBuilder();
+        str.append("<html><br />");
 
-    	for (int x=0; x<Board.getBoardDimensions()[0];x++)
-    	{
-	    	for (int y=0; y<Board.getBoardDimensions()[1];y++)
-	    	{
-	    		if (!(y == 2 && x == 2))
-	    		    str.append(Board.board[x][y].getFood() + "\t");
-	    		else
-	    			str.append("Compass!!\t\t");
-	    	}
+        for (int x=0; x<Board.getBoardDimensions()[0];x++)
+        {
+             for (int y=0; y<Board.getBoardDimensions()[1];y++)
+             {
+                   if (!(y == 2 && x == 2))
+                       str.append(Board.board[x][y].getFood() + "&nbsp;&nbsp;&nbsp;&nbsp;");
+                   else
+                        str.append("Compass!!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+              }
 
-	    	str.append("\n");
-	
-	    	for (int y=0; y<Board.getBoardDimensions()[1];y++)
-	    	{
-	    		if (!(y == 2 && x == 2))
-	    		    str.append(Board.board[x][y].getAmoebes() + "\t");
-	    	    else
-	    		    str.append("Compass!!\t\t");
-	    	}
+              str.append("<br />");
+     
+              for (int y=0; y<Board.getBoardDimensions()[1];y++)
+              {
+                   if (!(y == 2 && x == 2))
+                       str.append(Board.board[x][y].getAmoebes() + "&nbsp;&nbsp;&nbsp;&nbsp;");
+                  else
+                       str.append("Compass!!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+              }
 
-	    	str.append("\n\n");
-    	}
-    	return str.toString();
+              str.append("<br /><br />");
+         }
+         str.append("</html>");
+         return str.toString();
     }
+ 
+    /**
+     * repaints the GUI representation of the whole Board.
+     */
+     public void repaintGUI() {
+         boardLabel.setText(this.toString());
+         this.boardGUIFrame.repaint();
+     }
+     
+     /**
+      * sets the new text of the GUI's state label. The new
+      * text is not allowed to be null.
+      * 
+      * @param new text to set
+      */
+      public void setStateLabel(String newText) {
+          assert newText != null;
+          this.stateLabel.setText(newText);
+      }
 }

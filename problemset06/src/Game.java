@@ -184,7 +184,21 @@ public final class Game {
             amoebe.eat(useFrugality); // this includes excrements
         }
         
-        System.out.println(this.board.toString());
+        repaintGUIBoard();
+    }
+    
+    
+    /**
+     * Repaints the GUI accordingly.
+     * 
+     * MK: I know there is a dispute about acronyms in method names
+     * Since we name all methods using CamelCase it should probably
+     * be "repaintGuiBoard" since we don't want to be confused with acronyms.
+     * In my opinion "repaintGUIBoard" is just fine. But as I said, there is a dispute.
+     * @AK: what do you think?
+     */
+    private void repaintGUIBoard() {
+        board.repaintGUI();
     }
     
     /**
@@ -285,9 +299,9 @@ public final class Game {
             else
                 geneScore = 0;
             
-            System.out.print("Player " + player.getName() + " gets " + (geneScore + steps) + " points and has now ");
+            this.setState("Player " + player.getName() + " gets " + (geneScore + steps) + " points and has now ");
             player.addScore(geneScore + steps);
-            System.out.print(player.getScore() + " points!\n");
+            this.setState(player.getScore() + " points!\n");
         }
         
         System.out.println(this.board.toString());
@@ -296,5 +310,14 @@ public final class Game {
     
     public String toString(){
     	return "[ board="+this.board+", current round="+this.currentRound+"]";
+    }
+    
+    /**
+     * tells the board to set a new state text
+     * 
+     * @param new text
+     */
+    public void setState(String newText) {
+        board.setStateLabel(newText);
     }
 }

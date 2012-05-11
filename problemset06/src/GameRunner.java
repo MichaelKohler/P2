@@ -10,6 +10,8 @@ import static org.junit.Assert.assertTrue;
 /**
  * the |GameRunner| is responsible to run the whole program
  * as a smoke test.
+ * 
+ * @see * @see http://i0.kym-cdn.com/photos/images/newsfeed/000/085/444/1282786204310.jpg?1318992465
  */
 
 public class GameRunner {
@@ -25,6 +27,17 @@ public class GameRunner {
         initGame();
         createPlayerQueueFromDice();
         play();
+        
+        try {
+            Thread.sleep(100000);
+            /* If rainbows were something bad, we'd puke rainbows while
+             * looking at this code. Seriously, using a Test to run the game
+             * doesn't seem to be a good idea now. Before
+             * we thought it would be great, but now it makes us quite
+             * uncomfortable. Since this PS is about GUI implementation, we'll
+             * just ignore this fact even though our tests won't complete.
+             */
+        } catch (Exception ex) {}
     }
 
     public void initGame() {
@@ -40,7 +53,7 @@ public class GameRunner {
         assertTrue(playersQueue.size() == 3);
         
         game = GameFactory.get(players);
-        System.out.println("Game ready..");
+        game.setState("Game ready..");
     }
     
     /**
@@ -68,7 +81,7 @@ public class GameRunner {
             }
             System.out.println("Round " + game.getCurrentRound() + " has started!");
             for (int i = 0; i < playersQueue.size(); i++) {
-                System.out.println("It's " + playersQueue.get(i).getName() + "'s turn!");
+                game.setState("It's " + playersQueue.get(i).getName() + "'s turn!");
                 Die decisions = this.dieProvider.get();
                 int number = decisions.roll(1, 2);
                 if (number == 1) {
@@ -112,7 +125,7 @@ public class GameRunner {
             assertTrue(game.getCurrentRound() == currentRound + 1);
         }
         assertTrue(winner != null);
-        System.out.println(winner.getName() + " has won!");
+        game.setState(winner.getName() + " has won!");
     }
     
     private Compass.Direction getDirectionForDecision(int direction) {
