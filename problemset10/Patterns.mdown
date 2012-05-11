@@ -2,7 +2,7 @@
 
 While your boss is on holiday, the CTO can hog you all for himself. He
 recently got his hands on a book regarding Design Patterns and is now
-convinced, that every problem in programming there is and ever will be can be
+convinced that every problem in programming there is and ever will be can be
 solved by picking the right pattern.
 
 He's also conviced that you, since you are such able programmers, have already
@@ -14,7 +14,7 @@ therefore more patterns are more better (or so he says). Note that the *Singleto
 
 **Note:** You have access to the Gang of Four book
 [here](http://scgresources.unibe.ch/~scg/Literature/Books/GOF/contfso.htm),
-which defined the pattern vocabulary. However as time moves on, there where
+which defined the pattern vocabulary. However as time moves on, there were
 more commonly used pattern discovered. Wikipedia has an extensive list
 [here][wiki_design_pattern].
 
