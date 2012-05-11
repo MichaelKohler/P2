@@ -1,45 +1,20 @@
-import static org.junit.Assert.*;
-import ch.unibe.jexample.Given;
-import ch.unibe.jexample.JExample;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
-import com.google.inject.Provider;
 
-@RunWith(JExample.class)
 public class PlayerTest {
 
     private Player[] testPlayers = new Player[1];
-    private Provider<Die> dieProvider = new DieProvider();
-    private Provider<Compass> compassProvider = new CompassProvider();
-
+    
     @Test
     public Player[] initPlayer() {
-        testPlayers[0] = PlayerFactory.get(compassProvider, dieProvider, "TestPlayer1");
+        testPlayers[0] = new Player(null, null, "TestPlayer1");
         testPlayers[0].chooseColor(Game.Color.RED);
         
+        Game game = GameFactory.get(testPlayers);
+        assertTrue(game.getPlayers().length == 1);
 
         return testPlayers;
-    }
-
-    @Given("initPlayer")
-    public void playerShouldBeInitialized(Player[] players) {
-        Game game = GameFactory.get(players);
-        assertTrue(game.getPlayers().length == 1);
-    }
-    
-    @Given("initPlayer")
-    public void playerShouldHaveScoreZero() {
-        assertTrue(testPlayers[0].getScore() == 0);
-    }
-    
-    @Given("initPlayer")
-    public void playerShouldHaveAName() {
-        assertTrue(!testPlayers[0].getName().equals(""));
-    }
-    
-    @Given("initPlayer")
-    public void playerShouldHaveAColor() {
-        assertTrue(testPlayers[0].getColor() == Game.Color.RED);
     }
 }
