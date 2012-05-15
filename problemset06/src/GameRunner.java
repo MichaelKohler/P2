@@ -7,6 +7,9 @@ import com.google.inject.Provider;
 
 import static org.junit.Assert.assertTrue;
 
+@interface IntegrationTest {}
+//Annotation definition
+
 /**
  * the |GameRunner| is responsible to run the whole program
  * as a smoke test.
