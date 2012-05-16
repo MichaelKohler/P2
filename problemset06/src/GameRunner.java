@@ -1,6 +1,8 @@
+import java.util.Collections;
 import java.util.List;
 import java.util.Arrays;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Provider;
@@ -11,9 +13,29 @@ import static org.junit.Assert.assertTrue;
  * the |GameRunner| is responsible to run the whole program
  * as a smoke test.
  * 
- * @see * @see http://i0.kym-cdn.com/photos/images/newsfeed/000/085/444/1282786204310.jpg?1318992465
+ * @see  http://i0.kym-cdn.com/photos/images/newsfeed/000/085/444/1282786204310.jpg?1318992465
  */
 
+/*
+ * AK It's not as bad as you put it, a simple trick can make this a normal
+ * application and not a test. I didn't have trouble compiling your problemset
+ * I only saw that some tests were somewhat uninteresting (getter/setters), 
+ * which probably slipped by me on the ursuppe correction.
+ * 
+ * Another thing is that you should decouple the game from its representation,
+ * i.e. not having the game provide the GUI. That way you can have both
+ * a GUI and a TextUI on two different runners. If you are interested, 
+ * this is probably best solved with Observers and messages:
+ *    1) make some messages: https://github.com/zombiecalypse/Ursuppe-Sample/tree/master/src/com/acme/ursuppe/events
+ *    2) register the gui as observer: https://github.com/zombiecalypse/Ursuppe-Sample/blob/master/src/com/acme/ursuppe/runners/TextUi.java#L24
+ *    3) dispatch all the messages that you can get: https://github.com/zombiecalypse/Ursuppe-Sample/blob/master/src/com/acme/ursuppe/runners/TextUi.java#L34
+ *    4) do something interesting with the information: https://github.com/zombiecalypse/Ursuppe-Sample/blob/master/src/com/acme/ursuppe/runners/TextUi.java#L46
+ *    
+ *    
+ * As a sidenote: your problemset is also...
+ * 
+ * ACCEPTED
+ */
 public class GameRunner {
 
     private Game game;
@@ -21,8 +43,11 @@ public class GameRunner {
     List<Player> playersQueue;
     private final Provider<Die> dieProvider = new DieProvider();
     private final Provider<Compass> compassProvider = new CompassProvider();
+    
+    public static void main(String[] args) {
+    	(new GameRunner()).shouldRunRandomGame();
+    }
 
-    @Test
     public void shouldRunRandomGame() {
         initGame();
         createPlayerQueueFromDice();
@@ -36,6 +61,11 @@ public class GameRunner {
              * we thought it would be great, but now it makes us quite
              * uncomfortable. Since this PS is about GUI implementation, we'll
              * just ignore this fact even though our tests won't complete.
+             * 
+             * AK well, the easy way around using tests for this is 
+             * added above. One of the great advantages of java over
+             * C(++) is that multiple `main` methods are not a problem.
+             * In eclipse, you can even choose from them when you Run.
              */
         } catch (Exception ex) {}
     }
@@ -61,6 +91,8 @@ public class GameRunner {
      */
     private void createPlayerQueueFromDice() {
         // TODO: create queue
+    	// AK Lazy programmers solution (do before making Game):
+//    	Collections.shuffle(playersQueue);
     }
     
     /**

@@ -196,6 +196,9 @@ public final class Game {
      * be "repaintGuiBoard" since we don't want to be confused with acronyms.
      * In my opinion "repaintGUIBoard" is just fine. But as I said, there is a dispute.
      * @AK: what do you think?
+     * 
+     * AK the "standard" is indeed "repaintGuiBoard", but there's not much
+     * harm done, if you're consistent.
      */
     private void repaintGUIBoard() {
         board.repaintGUI();

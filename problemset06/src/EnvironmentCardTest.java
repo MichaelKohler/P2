@@ -13,7 +13,7 @@ public class EnvironmentCardTest {
     public void calculateOzonLayerShouldWorkCorrectly() {
     	Provider<IDie> iDieProvider = new IDieProvider();
         EnvironmentCard card = EnvironmentCardFactory.get(iDieProvider);
-        assertTrue(Compass.direction == Compass.Direction.EAST);
+        assertTrue(Compass.direction == Compass.Direction.EAST); // AK how is that even affected by the generation of the EnvironmentCard?
         assertTrue(Compass.ozonLayer == 3);
     }
 }

@@ -4,6 +4,7 @@ import org.junit.experimental.categories.*;
 
 import com.google.inject.Provider;
 
+// AK cool idea!
 @Category(IIntegrationTests.class)
 public class AmoebeIntegrationTest {
     private Provider<Compass> compassProvider;

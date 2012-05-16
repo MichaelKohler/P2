@@ -12,8 +12,8 @@ public final class EnvironmentCard implements IEnvironmentCard {
 	
     public EnvironmentCard(Provider<IDie> dieProvider) {
     	this.dieProvider = dieProvider;
-        Compass.direction = calculateNewDirection();
-        Compass.ozonLayer = calculateOzonLayer();
+        Compass.direction = calculateNewDirection(); // AK Constructors should not have side effects out of the class 
+        Compass.ozonLayer = calculateOzonLayer();    // as you see somewhere else, it confused me as well, because I didn't expect such a thing
     }
 
     /**
