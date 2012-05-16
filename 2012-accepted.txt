@@ -19,19 +19,19 @@ group05             ok  ok  ok  ok  ok  wow ok  nef nef
 group06             ok  ok  ok  wow ok  ++  ++  wow (11.5)
 group08             ok  ok  ok  ok  wow ok  td  ok  ++ (18.5)
 group09             ok  ok  wow ok  wow wow wow ok  --
-group10             ok  ok  ok  --  ok  ok  --  --
+group10             ok  ok  ok  --  ok  ok  --  --  --
 group11             ok  ok  ok  ok  wow wow nef ok  ok
 group12             ok  ok  wow ok  wow wow --  ok  ok
 group13             ok  ok  ok  ok  wow ok  --  wow ++ (18.5)
 group14             ok  ok  ok  ok  ++  ++  ++  ok  (27.4)
 group15             ok  ok  ok  ok  ok  ok  nef wow ++ (16.5)
-group16             ok  ok  ok  ok  ok  ok  nef wow
+group16             ok  ok  ok  ok  ok  ok  nef wow ok
 group17             ok  ok  ok  ok  nef ++  ++  ok  ++ (18.5)
 group18             ok  ok  ok  ok  ok  ok  ++  wow ++ (18.5)
 group19             ok  ok  ok  ok  ok  --  --  --  --
 group20             ok  ok  wow ok  wow wow wow ok  --
 group24             ok  ok  ok  ok  ok  ok  nef ok  ok
-group26             ok  ok  ok  ok  --  --  --  wow
+group26             ok  ok  ok  ok  --  --  --  wow --
  
   ok:   accepted.
  nef:   revision required by next week.
