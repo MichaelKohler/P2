@@ -46,7 +46,7 @@ public final class Game {
     private int currentRound;
     private final Provider<Die> dieProvider;
     private final Provider<IDie> iDieProvider; // AK isn't this redundant?
-	private final Provider<Compass> compassProvider;
+    private final Provider<Compass> compassProvider;
     
     public Game(Provider<Compass> compassProvider, Provider<IDie> iDieProvider, Provider<Die> dieProvider, Player[] players) {
     	this.compassProvider = compassProvider;
@@ -179,12 +179,10 @@ public final class Game {
         for (int i = 0; i < allAmoebesForPlayer.size(); i++) {
             Amoebe amoebe = allAmoebesForPlayer.get(i);
             boolean useTentacles = player.hasGene("tentacles");
-            amoebe.drift(null, useTentacles);
+            amoebe.drift(Compass.direction, useTentacles);
             boolean useFrugality = player.hasGene("frugality");
             amoebe.eat(useFrugality); // this includes excrements
         }
-        
-        repaintGUIBoard();
     }
     
     
@@ -200,9 +198,7 @@ public final class Game {
      * AK the "standard" is indeed "repaintGuiBoard", but there's not much
      * harm done, if you're consistent.
      */
-    private void repaintGUIBoard() {
-        board.repaintGUI();
-    }
+    /* method deleted , the comment stays as reference */
     
     /**
      * does everything which needs to be done in phase 2.
@@ -322,5 +318,12 @@ public final class Game {
      */
     public void setState(String newText) {
         board.setStateLabel(newText);
+    }
+    
+    /**
+     * returns the board
+     */
+    public Board getBoard() {
+        return this.board;
     }
 }

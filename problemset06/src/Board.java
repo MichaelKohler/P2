@@ -1,9 +1,3 @@
-import java.awt.BorderLayout;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import com.google.inject.Provider;
 
 /**
@@ -15,11 +9,11 @@ public final class Board {
     private final Player[] players;
     private final Provider<Die> dieProvider;
     private final Provider<Compass> compassProvider;
-    private JFrame boardGUIFrame;
-    private JLabel boardLabel;
-    private JLabel stateLabel;
+    private BoardGUI boardGUI;
+    
 
-    public Board(Provider<Compass> compassProvider, Provider<Die> dieProvider, Player[] players) {
+    public Board(Provider<Compass> compassProvider, Provider<Die> dieProvider,
+                       Player[] players) {
          this.compassProvider = compassProvider;
          this.dieProvider = dieProvider;
         this.players = players;
@@ -41,7 +35,14 @@ public final class Board {
          assert invariant();
         createSquares();
         setAmoebesToSquares();
-        createGUI();
+        this.boardGUI = new BoardGUI(this);
+    }
+    
+    /**
+     * returns the GUI
+     */
+    public BoardGUI getGUI() {
+        return this.boardGUI;
     }
     
     /**
@@ -98,31 +99,6 @@ public final class Board {
         }
     }
     
-    /**
-     * Creates the whole GUI. The GUI has a board (ASCII) and displays a Label
-     * which informs the user about the Game state (e.g. whose turn it is).
-     */
-    private void createGUI() {
-        boardGUIFrame = new JFrame();
-        boardGUIFrame.setVisible(true);
-        boardGUIFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        boardGUIFrame.setSize(600, 400);
-        boardGUIFrame.setResizable(true);
-        boardGUIFrame.setTitle("Ursuppe - Problemset09");
-        
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-        
-        String boardsStringRep = this.toString();
-        boardLabel = new JLabel(boardsStringRep);
-        panel.add(boardLabel, BorderLayout.CENTER);
-        
-        stateLabel = new JLabel();
-        panel.add(stateLabel, BorderLayout.SOUTH);
-        
-        boardGUIFrame.add(panel);
-        boardGUIFrame.repaint();
-    }
     
     /**
      * returns the array of Players which participate in the game
@@ -178,14 +154,6 @@ public final class Board {
          str.append("</html>");
          return str.toString();
     }
- 
-    /**
-     * repaints the GUI representation of the whole Board.
-     */
-     public void repaintGUI() {
-         boardLabel.setText(this.toString());
-         this.boardGUIFrame.repaint();
-     }
      
      /**
       * sets the new text of the GUI's state label. The new
@@ -195,6 +163,6 @@ public final class Board {
       */
       public void setStateLabel(String newText) {
           assert newText != null;
-          this.stateLabel.setText(newText);
+          this.boardGUI.setLabel(newText);
       }
 }

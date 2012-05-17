@@ -1,20 +1,12 @@
-import java.util.Collections;
 import java.util.List;
 import java.util.Arrays;
-
-import org.junit.Ignore;
-import org.junit.Test;
 
 import com.google.inject.Provider;
 
 import static org.junit.Assert.assertTrue;
 
-@interface IntegrationTest {}
-//Annotation definition
-
 /**
- * the |GameRunner| is responsible to run the whole program
- * as a smoke test.
+ * the |GameRunner| is responsible to run the whole program.
  * 
  * @see  http://i0.kym-cdn.com/photos/images/newsfeed/000/085/444/1282786204310.jpg?1318992465
  */
@@ -39,7 +31,7 @@ import static org.junit.Assert.assertTrue;
  * 
  * ACCEPTED
  */
-public class GameRunner {
+public class GameRunner extends TypedObservable<UrsuppeEvent> {
 
     private Game game;
     // TODO: dice rolling
@@ -56,7 +48,7 @@ public class GameRunner {
         createPlayerQueueFromDice();
         play();
         
-        try {
+        /*try {
             Thread.sleep(100000);
             /* If rainbows were something bad, we'd puke rainbows while
              * looking at this code. Seriously, using a Test to run the game
@@ -69,8 +61,8 @@ public class GameRunner {
              * added above. One of the great advantages of java over
              * C(++) is that multiple `main` methods are not a problem.
              * In eclipse, you can even choose from them when you Run.
-             */
-        } catch (Exception ex) {}
+             *
+        } catch (Exception ex) {}*/
     }
 
     public void initGame() {
@@ -86,6 +78,7 @@ public class GameRunner {
         assertTrue(playersQueue.size() == 3);
         
         game = GameFactory.get(players);
+        game.getBoard().getGUI().bindObserver(this);
         game.setState("Game ready..");
     }
     
@@ -116,7 +109,7 @@ public class GameRunner {
             }
             System.out.println("Round " + game.getCurrentRound() + " has started!");
             for (int i = 0; i < playersQueue.size(); i++) {
-                game.setState("It's " + playersQueue.get(i).getName() + "'s turn!");
+                this.notifyObservers(new PlayerChangedEvent(playersQueue.get(i)));
                 Die decisions = this.dieProvider.get();
                 int number = decisions.roll(1, 2);
                 if (number == 1) {
@@ -150,6 +143,7 @@ public class GameRunner {
                         playersQueue.get(i).setBp(bp - 1);
                 }
             }
+            this.notifyObservers(new BoardChangedEvent(game.getBoard()));
             game.phase2();
             game.phase3();
             game.phase4();
@@ -160,7 +154,7 @@ public class GameRunner {
             assertTrue(game.getCurrentRound() == currentRound + 1);
         }
         assertTrue(winner != null);
-        game.setState(winner.getName() + " has won!");
+        this.notifyObservers(new PlayerWinsEvent(winner));
     }
     
     private Compass.Direction getDirectionForDecision(int direction) {
