@@ -52,6 +52,7 @@ public class BoardGUI implements TypedObserver<UrsuppeEvent> {
     }
     
     private void dispatch(BoardChangedEvent e) {
+    	boardLabel.setText(e.getBoard().toString()); // AK FTFY
         this.boardGUIFrame.repaint();
     }
     

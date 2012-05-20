@@ -3,9 +3,22 @@ We used the following Patterns in our Ursuppe implementation:
 **Factory method Pattern**
 We used Factories to avoid the 'new' keyword. Every time we create an instance, we do it using Factories, which provide us the requested instance. (At least this was the idea, we didn't exactly get rid of the 'new' keyword. See also AK's comment on Board.java#57: https://github.com/MichaelKohler/P2/blob/master/problemset06/src/Board.java#L57
 
+AK: that's good, you could also have choosen Dependency Injection.
+
 **Iterator Pattern**
 Iterators are used to iterate over lists. Even though it doesn't look like we used them, the lists use them internally to get the requested item.
 
+AK: Hrhr, that's a bit far-fetched, but we wouldn't expect your code to spill
+over with patterns anyway, so don't sweat it.
 
 **Observer Pattern**
 As a task for Problemset10 we implemented the Observer pattern. This allows us to decouple the Game from the GUI. It notifies the registered observers every time an event is raised. In the Observer we can handle the event a do whatever needs to be done.
+
+AK: You did quite nicely, eventhough you could have decoupled the gui from the
+model even more. 
+
+Anyway, your problemset10 is ACCEPTED.
+
+Even more, since that is your ninth accepted problemset, you are admitted to
+the exam, so you might want to look over the lecture notes (or what you do
+nowadays for fun).

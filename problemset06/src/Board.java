@@ -9,6 +9,12 @@ public final class Board {
     private final Player[] players;
     private final Provider<Die> dieProvider;
     private final Provider<Compass> compassProvider;
+    /*
+     * AK you could decouple this more, if you just made this
+     * observable and `notify`-ed the observers on time.
+     * You can have the same observer registered all over the place
+     * and receive all notifications.
+     */
     private BoardGUI boardGUI;
     
 
