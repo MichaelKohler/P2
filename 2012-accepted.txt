@@ -11,7 +11,7 @@ To be admitted for the exam, you need to pass a6 (Ursuppe) and
 -------------------------------------------------------------------------------------
 
                     a01 a02 a03 a04 a05 a06 a07 a08 a09 a10 a11     admitted
-group01             ok  ok  ok  ok  ok  ok  ok  wow nef                
+group01             ok  ok  ok  ok  ok  ok  ok  wow ok                \o/                
 group02             ok  ok  ok  ok  ok  ok  ok  ok  nef ok            \o/
 group03             ok  ok  wow wow wow ok  nef ok  wow
 group04             ok  ok  ok  ok  wow ok  wow ok  ok  --            \o/
