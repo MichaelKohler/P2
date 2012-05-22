@@ -11,27 +11,27 @@ To be admitted for the exam, you need to pass a6 (Ursuppe) and
 -------------------------------------------------------------------------------------
 
                     a01 a02 a03 a04 a05 a06 a07 a08 a09 a10 a11     admitted
-group01             ok  ok  ok  ok  ok  ok  ok  wow nef                
-group02             ok  ok  ok  ok  ok  ok  ok  ok  nef
+group01             ok  ok  ok  ok  ok  ok  ok  wow ok                \o/                
+group02             ok  ok  ok  ok  ok  ok  ok  ok  nef ok            \o/
 group03             ok  ok  wow wow wow ok  nef ok  wow
-group04             ok  ok  ok  ok  wow ok  wow ok  ok                \o/
+group04             ok  ok  ok  ok  wow ok  wow ok  ok  --            \o/
 group05             ok  ok  ok  ok  ok  wow ok  nef nef
-group06             ok  ok  ok  wow ok  ++  ++  wow (11.5)
-group08             ok  ok  ok  ok  wow ++  ++  ok (4.5)
+group06             ok  ok  ok  wow ok  wow ok  wow ++  ++
+group08             ok  ok  ok  ok  wow ok  td  ok  ok (18.5)
 group09             ok  ok  wow ok  wow wow wow ok  --
-group10             ok  ok  ok  --  ok  ok  --  --
+group10             ok  ok  ok  --  ok  ok  --  --  --
 group11             ok  ok  ok  ok  wow wow nef ok  ok
-group12             ok  ok  wow ok  wow wow --  ok  ok
-group13             ok  ok  ok  ok  wow ok  --  wow ++ (18.5)
+group12             ok  ok  wow ok  wow wow --  ok  ok  ok            \o/
+group13             ok  ok  ok  ok  wow ok  wow wow ok                \o/
 group14             ok  ok  ok  ok  ++  ++  ++  ok  (27.4)
 group15             ok  ok  ok  ok  ok  ok  nef wow ++ (16.5)
-group16             ok  ok  ok  ok  ok  ok  nef wow
+group16             ok  ok  ok  ok  ok  ok  nef wow ok  ok            \o/
 group17             ok  ok  ok  ok  nef ++  ++  ok  ++ (18.5)
-group18             ok  ok  ok  ok  ok  ok  ++  wow ++ (18.5)
+group18             ok  ok  ok  ok  ok  ok  --  wow ok  ok            \o/
 group19             ok  ok  ok  ok  ok  --  --  --  --
-group20             ok  ok  wow ok  wow wow wow ok  --
-group24             ok  ok  ok  ok  ok  ok  nef nef
-group26             ok  ok  ok  ok  --  --  --  wow
+group20             ok  ok  wow ok  wow wow wow ok  wow               \o/
+group24             ok  ok  ok  ok  ok  ok  ok  ok  ok                \o/
+group26             ok  ok  ok  ok  --  --  --  wow --
  
   ok:   accepted.
  nef:   revision required by next week.
