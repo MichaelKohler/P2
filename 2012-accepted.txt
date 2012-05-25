@@ -17,9 +17,9 @@ group03             ok  ok  wow wow wow ok  nef ok  wow
 group04             ok  ok  ok  ok  wow ok  wow ok  ok  --            \o/
 group05             ok  ok  ok  ok  ok  wow ok  nef nef
 group06             ok  ok  ok  wow ok  wow ok  wow ++  ++
-group08             ok  ok  ok  ok  wow ok  td  ok  ok (18.5)
+group08             ok  ok  ok  ok  wow ok  td  ok  ok  td  ok        \o/
 group09             ok  ok  wow ok  wow wow wow ok  --
-group10             ok  ok  ok  --  ok  ok  --  --  --
+group10             ok  ok  ok  --  ok  ok  --  ok  --
 group11             ok  ok  ok  ok  wow wow nef ok  ok
 group12             ok  ok  wow ok  wow wow --  ok  ok  ok            \o/
 group13             ok  ok  ok  ok  wow ok  --  wow ++ (18.5)
