@@ -13,22 +13,22 @@ To be admitted for the exam, you need to pass a6 (Ursuppe) and
                     a01 a02 a03 a04 a05 a06 a07 a08 a09 a10 a11     admitted
 group01             ok  ok  ok  ok  ok  ok  ok  wow ok                \o/                
 group02             ok  ok  ok  ok  ok  ok  ok  ok  nef ok            \o/
-group03             ok  ok  wow wow wow ok  nef ok  wow
+group03             ok  ok  wow wow wow ok  nef ok  wow ok            \o/
 group04             ok  ok  ok  ok  wow ok  wow ok  ok  --            \o/
-group05             ok  ok  ok  ok  ok  wow ok  nef nef
+group05             ok  ok  ok  ok  ok  wow ok  ok  ok  nef           \o/
 group06             ok  ok  ok  wow ok  wow ok  wow ++  ++
-group08             ok  ok  ok  ok  wow ok  td  ok  ok (18.5)
-group09             ok  ok  wow ok  wow wow wow ok  --
-group10             ok  ok  ok  --  ok  ok  --  --  --
-group11             ok  ok  ok  ok  wow wow nef ok  ok
+group08             ok  ok  ok  ok  wow ok  td  ok  ok  td  ok        \o/
+group09             ok  ok  wow ok  wow wow wow ok  --  --
+group10             ok  ok  ok  --  ok  ok  --  ok  --
+group11             ok  ok  ok  ok  wow wow nef ok  ok  nef
 group12             ok  ok  wow ok  wow wow --  ok  ok  ok            \o/
-group13             ok  ok  ok  ok  wow ok  wow wow ok                \o/
+group13             ok  ok  ok  ok  wow ok  --  wow wow ok            \o/
 group14             ok  ok  ok  ok  ++  ++  ++  ok  (27.4)
-group15             ok  ok  ok  ok  ok  ok  nef wow ++ (16.5)
+group15             ok  ok  ok  ok  ok  ok  nef wow ok  ok            \o/
 group16             ok  ok  ok  ok  ok  ok  nef wow ok  ok            \o/
-group17             ok  ok  ok  ok  nef ++  ++  ok  ++ (18.5)
+group17             ok  ok  ok  ok  ok  ok  ok  ok  --  ok            \o/
 group18             ok  ok  ok  ok  ok  ok  --  wow ok  ok            \o/
-group19             ok  ok  ok  ok  ok  --  --  --  --
+group19             ok  ok  ok  ok  ok  --  --  --  --  --
 group20             ok  ok  wow ok  wow wow wow ok  wow               \o/
 group24             ok  ok  ok  ok  ok  ok  ok  ok  ok                \o/
 group26             ok  ok  ok  ok  --  --  --  wow --
@@ -37,7 +37,6 @@ group26             ok  ok  ok  ok  --  --  --  wow --
  nef:   revision required by next week.
 fail:   total failure. 
   --:   nothing was submitted.	
- fix:   fixed problemset.
   ++:   deadline prolonged.
  wow:   Especially rad solution.
-admitted:   admitted to the exam.
+ \o/:   admitted to the exam.
