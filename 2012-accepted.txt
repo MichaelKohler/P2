@@ -19,7 +19,7 @@ group05             ok  ok  ok  ok  ok  wow ok  ok  ok  nef           \o/
 group06             ok  ok  ok  wow ok  wow ok  wow ++  ok            \o/
 group08             ok  ok  ok  ok  wow ok  td  ok  ok  td  ok        \o/
 group09             ok  ok  wow ok  wow wow wow ok  --  --
-group10             ok  ok  ok  td  ok  ok  td  ok  td  td  ok
+group10             ok  ok  ok  --  ok  ok  --  ok  ok  --  ok
 group11             ok  ok  ok  ok  wow wow nef ok  ok  nef
 group12             ok  ok  wow ok  wow wow --  ok  ok  ok            \o/
 group13             ok  ok  ok  ok  wow ok  --  wow wow ok            \o/
